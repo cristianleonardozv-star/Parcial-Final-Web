@@ -3,7 +3,7 @@ package com.mundialscore.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
+
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,8 +44,10 @@ public class SecurityConfig {
                 // Cualquier otra cosa autenticada
                 .anyRequest().authenticated());
 
-        // Basic Auth para usar fácil en Swagger
-        http.httpBasic(Customizer.withDefaults());
+        // Basic Auth personalizado para evitar popup del navegador
+        http.httpBasic(basic -> basic.authenticationEntryPoint((request, response, authException) -> {
+            response.sendError(jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        }));
 
         return http.build();
     }
