@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Tabla General</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "gold": "#FFD700",
+                        "silver": "#C0C0C0",
+                        "bronze": "#CD7F32",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', 'Noto Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b]">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7ebf3] bg-white px-6 py-3 shadow-sm lg:px-10">
+<div class="flex items-center gap-4 text-[#0d121b]">
+<div class="size-8 flex items-center justify-center rounded bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">sports_soccer</span>
+</div>
+<h2 class="text-[#0d121b] text-xl font-bold leading-tight tracking-[-0.015em]">MundialScore</h2>
+</div>
+<!-- Desktop Nav -->
+<div class="hidden flex-1 justify-end gap-8 md:flex">
+<div class="flex items-center gap-9">
+<a class="text-[#4c669a] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Pronósticos</a>
+<a class="text-primary text-sm font-bold leading-normal relative after:content-[''] after:absolute after:left-0 after:-bottom-5 after:w-full after:h-1 after:bg-primary after:rounded-t-sm" href="#">Tabla General</a>
+<a class="text-[#4c669a] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Mi Perfil</a>
+<a class="text-[#4c669a] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Reglas</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#e7ebf3] hover:bg-[#dbe0ea] text-[#0d121b] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-white shadow-md cursor-pointer" data-alt="Profile picture of the logged in user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVZA3C9H7qRk8VxjwqvZLKLejDe965opk9mLVrY7JnQMCdtpj0OIY1DehoVvi5SJN6nZzNtEGl4jXFtAk6Bkv8l6XRbDS5UYqjbnzfPv_K9r-u4-gMq2LT7ZmbHUK3sidykTRMzIqR30111AZS43XmZq-S-qOLnkUpnttxHQrVvFyCg8yjEhXo8vuJktUWAJ8YPL7v6MEqT7mp2J_NO660W4ZXRY9g1SqRGgu2fa5T8SdGx0Wca0VbsIml9wXvEHgX3xud_Dz5yro");'></div>
+</div>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="flex md:hidden items-center justify-center p-2 text-[#0d121b]">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-[1024px] flex-1 px-4 lg:px-8">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 py-4 md:py-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0d121b] text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Tabla de Posiciones</h1>
+<p class="text-[#4c669a] text-base font-normal leading-normal">Mundial 2026 - Ranking Global</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-[#4c669a]">Filtrar por:</span>
+<div class="relative group">
+<button class="flex items-center gap-2 rounded-lg bg-white border border-[#cfd7e7] px-4 py-2 text-sm font-bold text-[#0d121b] shadow-sm hover:bg-[#f8f9fc]">
+                                    Global
+                                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Top 3 Podium -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-4 items-end">
+<!-- 2nd Place -->
+<div class="order-2 md:order-1 flex flex-col items-center">
+<div class="relative flex flex-col items-center bg-white rounded-xl p-6 w-full shadow-sm border border-[#e7ebf3] pt-12">
+<div class="absolute -top-10 ring-4 ring-white rounded-full">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-20 shadow-lg" data-alt="Avatar of the user in second place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1YaJEIpBeOSMWDCT4Q5686tMV-8SUhADrSVW2bagKmA-Q4MW6F9j5FBlGjW4zQ984RKPgSglY1RNgRtJz9e8Kl4FXmX1sd3zwLEyQiRzdEb_AgBHBnT7S8hGPmmy9UOy0DRQik4ng3PmHGSDvr56lxbmbUMNUhtjQGL27_Do7yzSgPizhWLI0QtdszSBIaEKumKCBoGO3v7jlmJizjLj1WpfMA0CT5BmlJFlcvE3XPGPBSTMuTgcNzonzULWhlEmrONb5Yd_jZiE");'></div>
+<div class="absolute -bottom-2 right-0 bg-silver text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                                        2
+                                    </div>
+</div>
+<h3 class="mt-2 text-lg font-bold text-[#0d121b]">Ana_Foot</h3>
+<p class="text-[#4c669a] text-sm">142 Puntos</p>
+<div class="mt-4 flex items-center gap-1 text-silver">
+<span class="material-symbols-outlined text-[32px]">emoji_events</span>
+</div>
+</div>
+</div>
+<!-- 1st Place -->
+<div class="order-1 md:order-2 flex flex-col items-center">
+<div class="relative flex flex-col items-center bg-gradient-to-b from-white to-[#fffdf0] rounded-xl p-6 w-full shadow-md border border-gold/30 pt-16 transform md:-translate-y-4">
+<div class="absolute -top-12 ring-4 ring-gold ring-offset-2 ring-offset-white rounded-full">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-24 shadow-xl" data-alt="Avatar of the user in first place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCdKqXyIwlAdsu8J8Pd4v_6wkbEzADUAn0TmgBHb79h9SWsiy7KdZxzLyRvUYB6V4Eh0DvUGNONS0K5CYKOMROZRDQRo2oL9rAhhqgiOHIA7GT1g4IRTgMtfw7kmGJXppFVitiD55-SVhh9TPBBaEWaTb_SBWIMB7tc3umHqbgiawKYeKV6bEvnG6RFfL1oXXMltZIvrejgiosmbyJgVRMVd4wOQBY94Pk2GFOCpV2CQZ98ujb8V9JcmCQhFNWtPFi7hJnsIGXBSnI");'></div>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gold text-[#0d121b] text-sm font-bold px-3 py-1 rounded-full shadow-md flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px]">stars</span> 1
+                                    </div>
+</div>
+<h3 class="mt-4 text-xl font-bold text-[#0d121b]">CarlosG</h3>
+<p class="text-primary font-bold text-base">150 Puntos</p>
+<div class="mt-4 flex items-center gap-1 text-gold">
+<span class="material-symbols-outlined text-[40px]">trophy</span>
+</div>
+</div>
+</div>
+<!-- 3rd Place -->
+<div class="order-3 md:order-3 flex flex-col items-center">
+<div class="relative flex flex-col items-center bg-white rounded-xl p-6 w-full shadow-sm border border-[#e7ebf3] pt-12">
+<div class="absolute -top-10 ring-4 ring-white rounded-full">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-20 shadow-lg" data-alt="Avatar of the user in third place" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBB5bv8TpxYtWg-GL2xlAuH1jaeZZc_P69p6IMky0zo3gnIAfiRACU_0krBjE5tFXV696Y6vvvcBdvQuS0vTXy7U1Ktdvef7ppXslecwk9RYHcc2uYlpfAcxkCMXcirO8iGmNSyBhjdIqGtsWWKu7NuhxbiquR81HlNJGs0TczRoGUxKIGxHVpxYQJHZrC6uQ4gy9iuWfHdrhO6yzbYjCOuwqnoMde3V9FejDOeSA6_cKaE7X8ueS7K1cT5qvpDgOHFGZfGkU8oXC8");'></div>
+<div class="absolute -bottom-2 right-0 bg-bronze text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                                        3
+                                    </div>
+</div>
+<h3 class="mt-2 text-lg font-bold text-[#0d121b]">SoccerKing</h3>
+<p class="text-[#4c669a] text-sm">138 Puntos</p>
+<div class="mt-4 flex items-center gap-1 text-bronze">
+<span class="material-symbols-outlined text-[32px]">emoji_events</span>
+</div>
+</div>
+</div>
+</div>
+<!-- My Stats Summary (Visible for User) -->
+<div class="mb-6 rounded-lg border border-primary/20 bg-primary/5 p-4 md:flex md:items-center md:justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-sm" data-alt="My user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD8FnN2z7M_nKk-PEjKeVxiXzVPqInNbJwLtMBZP_CKPaFfjSyaVGR2DFCDpPGn2loSJBKjiRndmky1HwlZt81nd-2wDbySOocN6afQt8nYU5q5XDHDUNhuM9Rh1V55V89rrB3Ksyb51edEnRKQklMsteds-1SX7Af7e11Hvau-g41eLO2et1iSXAU_AGt-hAIY5PWzj5whbxI8LWseQyGsIEBSdmdTCTk0WnryoHRBWhNnwhNnC5ZD0H2uQOCNIPONT7sqjW4MFAk");'></div>
+<div>
+<p class="text-sm font-medium text-[#4c669a]">Tu Posición Actual</p>
+<h3 class="text-lg font-bold text-[#0d121b]">#12 - AlexDev</h3>
+</div>
+</div>
+<div class="mt-4 flex gap-8 md:mt-0">
+<div>
+<p class="text-xs font-medium text-[#4c669a] uppercase tracking-wider">Aciertos</p>
+<p class="text-lg font-bold text-[#0d121b]">15</p>
+</div>
+<div>
+<p class="text-xs font-medium text-[#4c669a] uppercase tracking-wider">Puntos</p>
+<p class="text-lg font-bold text-primary">95 pts</p>
+</div>
+<div>
+<p class="text-xs font-medium text-[#4c669a] uppercase tracking-wider">Tendencia</p>
+<div class="flex items-center text-[#07883b] font-bold text-lg">
+<span class="material-symbols-outlined text-base mr-1">trending_up</span> +3
+                                </div>
+</div>
+</div>
+<button class="mt-4 w-full md:mt-0 md:w-auto rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-md hover:bg-blue-700 transition-colors">
+                            Ver mis detalles
+                        </button>
+</div>
+<!-- Leaderboard Table -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-[#cfd7e7] bg-white shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full min-w-[700px]">
+<thead>
+<tr class="bg-[#f8f9fc] border-b border-[#cfd7e7]">
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#4c669a] w-24">Posición</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-[#4c669a]">Usuario</th>
+<th class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-[#4c669a] w-32">Pronósticos</th>
+<th class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-[#4c669a] w-32">Aciertos</th>
+<th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-[#4c669a] w-40">Puntos Totales</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#cfd7e7]">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center justify-center size-8 rounded-full bg-gold/20 text-yellow-700 font-bold">
+<span class="material-symbols-outlined text-[18px]">emoji_events</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-gold mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB111D5jQTCJ9mtIbzSKeKxSMGBlYNWagQp377kdVm_cZd3KGnita_TRhBAArfgg1URpVbq4kItuVbFdJVSb9b6XvaiozkwYnHnE41LmyDA9RYXZrOWLw5Uc5e9n4cyLTuYZR1pbO2JJN5MXJBh9o1nTGUQlRzwTLXM2G7WHer80bnbfeWynNHbNqU5VpNoGvxPzCMxzHtjRagyrdyU8baCJE4zcu1tUz_jLVLGCDN5VgJTokjZE0Gu0-Q2LjUy8gO90Kj4t4HhRSo");'></div>
+<div class="font-bold text-[#0d121b]">CarlosG</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">48</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">30</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-bold text-primary">150</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center justify-center size-8 rounded-full bg-silver/20 text-gray-700 font-bold">
+                                                2
+                                            </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-silver mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuApLvY2ySxhFFJghQmgI72eqnO0CI8kIX8paGbND5sPbBqxvvlKoucpYPGo74ZEaHB61GTNx2B8EPevDBLtE_yh9xxtVFBttCdEMHGAsaWkqA-l9uRxXyDPdFEmvAz1jbIfjpiUaMjT6a18viwWWlpAjaNtgPAvoT_FNTJ-05sIZzSEFZgfhP4XPcKDJZevAney2oQkri9yoDmYBjzrrnvLY3dtJSCrbOkkAhtyG6s3vwiEgAfGCChWq9pos1TEDZ9Lt-2NqKvSQKE");'></div>
+<div class="font-bold text-[#0d121b]">Ana_Foot</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">48</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">28</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-bold text-[#0d121b]">142</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center justify-center size-8 rounded-full bg-bronze/20 text-yellow-900 font-bold">
+                                                3
+                                            </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-bronze mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1D4t50csmdOfOVqSCL4gZI8BRudMwC1VPzsMFZPuIWPfMpsqydBlBaemeGxu1foC_onYXXmoVzq_QlVq7-XbjyYlbBorfrza8QxXvlwoPu4tFNAZNr_EXj4ZSwDVFzak9hQCXz4jmyWm8JSYkht9eZ2mnGb8_gLifVbyWMg5qgXNWuKr3R4NfziSfcXji-uyAQL0R2x4ote7sTT_Xlse0fgwEyIx0AHUweOQo3iVK3w9tUhRZI7ObhwvtmkDg3H6hHEqiui3BzDk");'></div>
+<div class="font-bold text-[#0d121b]">SoccerKing</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">47</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">28</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-bold text-[#0d121b]">138</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#4c669a] pl-9">4</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 bg-gray-200 mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBoXMKCW5VPadb0z-l_cp3l-17b4EdzP1t009cd7SqwFF7HgqpFgehaLuQP3Fv12WZrzcqJQiD4mne85_f5uF8sbKIhz9eB6f47kpVRSogmJX05zo-NkSjWIy9SPjyI3aWQfCRO7k112mpuFSAY0iT31Ws1tRRkgaShCk5oRP5_mPWxLuv_w9CfhLbJJghlRKxkCO6yhwZGtmlXpBOiHXlFl3k55Rgu_PXZnj0jaInEjFqYPowTdL0qS4mDS0jyXh85qszI9W9lCLE");'></div>
+<div class="font-medium text-[#0d121b]">Luis19</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">48</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">25</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-medium text-[#0d121b]">120</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#4c669a] pl-9">5</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 bg-gray-200 mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4tZ5OVmWxofnrBDEbBBEkAIZVzMsZXUMlCqp9pwXvk7VBT1UuJE9NS50e4TNoy7dl9jibMD4iCq0NmMx3DnFyRFavxcKqfPE49AXRej0lTw7oW9tpmSw5_2Z5nWgAaabY4zDcODrDcEdpqk3gM2pNJrBWhd7mTpz57oOfQ9W5XwqZcizi9SGX73GfZ2VW9xh8orqtH-9_0f4dJD5Up_YhpcFUvIBYCoCDt4_ZBrmtZzdVyJcZ3ePXZc8fjMeOy8_RnyBr1ECtIsY");'></div>
+<div class="font-medium text-[#0d121b]">MariaGol</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">46</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">24</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-medium text-[#0d121b]">115</td>
+</tr>
+<!-- Separator for context -->
+<tr>
+<td class="px-6 py-2 text-center text-xs text-[#4c669a] font-medium bg-[#f8f9fc] tracking-widest uppercase" colspan="5">...</td>
+</tr>
+<!-- Highlighted User Row (Me) -->
+<tr class="bg-primary/5 border-l-4 border-l-primary transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-primary pl-8">12</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 ring-2 ring-primary ring-offset-2 mr-3" data-alt="My user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwkDt9i-fcI2zl-_wFzaNBpTzPpBc848jTljUScL_q2N4JzM-tog_In0VU2uCBU2lllM4l5apoR0DXxQzq17fa-tEjNlJxh2oWzjwLWOT_gxE7RXxZr7AqKXYoev-hd6JL0gfzhnu7wpioD1YJ_4oZw8tMOZu5jZ9L_jmRDjVCI7F8tF4rSKh90Qn0ZbqINdxHEY-xS2MlETLCXkGPSlU0IOMHaQL0z5rwK_kGq9alwoANskm5UGlI8DV2c3OvHBqamDGR8_tVun4");'></div>
+<div class="flex flex-col">
+<span class="font-bold text-[#0d121b]">AlexDev (Tú)</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">48</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">15</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-bold text-[#0d121b]">95</td>
+</tr>
+<!-- Row Below User -->
+<tr class="hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#4c669a] pl-9">13</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 bg-gray-200 mr-3" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCEdrARjWGQdqpliGi8VrcM8qxnDPeSAwY3GlTXQc1Rh6emxpUZgsAVCC4HxCHieOlZC79hMBSMej_gY3wy4jf1zQdWvTQ_-3b7Qhhm2OkmlWst6FiBzMt_wnAYG_LI_fiqJO7zJ5yY8nSUw8Y3e5KzOnRYp8kvnRR_lChUeXcNxARJJ55aunQy2j7450UyWlfaAyAsvoOJk8MyXavJWkIlNLgr1NQX8Xrk9sZd8Wn9boCHSWRfZ1xbCO7c06VegmT7IB4Hi8X42c");'></div>
+<div class="font-medium text-[#0d121b]">DavidS</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-[#4c669a]">44</td>
+<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-[#0d121b]">18</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-base font-medium text-[#0d121b]">92</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 mt-2">
+<p class="text-sm text-[#4c669a] hidden md:block">Mostrando <span class="font-bold text-[#0d121b]">1-13</span> de <span class="font-bold text-[#0d121b]">12,450</span> usuarios</p>
+<div class="flex items-center justify-center gap-1 w-full md:w-auto">
+<button class="flex size-9 items-center justify-center rounded-lg border border-[#e7ebf3] text-[#0d121b] hover:bg-gray-50 disabled:opacity-50">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-lg bg-primary text-white text-sm font-bold shadow-sm">1</button>
+<button class="flex size-9 items-center justify-center rounded-lg text-[#0d121b] hover:bg-[#e7ebf3] text-sm font-medium transition-colors">2</button>
+<button class="flex size-9 items-center justify-center rounded-lg text-[#0d121b] hover:bg-[#e7ebf3] text-sm font-medium transition-colors">3</button>
+<span class="flex size-9 items-center justify-center text-[#4c669a]">...</span>
+<button class="flex size-9 items-center justify-center rounded-lg text-[#0d121b] hover:bg-[#e7ebf3] text-sm font-medium transition-colors">125</button>
+<button class="flex size-9 items-center justify-center rounded-lg border border-[#e7ebf3] text-[#0d121b] hover:bg-gray-50">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Panel Principal</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-dark": "#25b860",
+                        "background-light": "#f8f9fa",
+                        "background-dark": "#111827",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1f2937",
+                        "accent-gold": "#fbbf24",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col transition-colors duration-200">
+<!-- Navbar -->
+<nav class="sticky top-0 z-50 w-full bg-card-light dark:bg-card-dark border-b border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary-dark dark:text-primary">
+<span class="material-symbols-outlined text-2xl">sports_soccer</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        Mundial<span class="text-primary-dark dark:text-primary">Score</span>
+</h1>
+</div>
+<!-- User Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Salir</span>
+</button>
+<div class="size-10 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border-2 border-primary">
+<img alt="Avatar del usuario" class="w-full h-full object-cover" data-alt="portrait of a smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbAHroYFLFpNxd74iTbx0Jk2kopwrW2aj-VS-O_E51lthyKBSTqyyvsUa1AnMiRQ4UuJ2viUBNpA5qX2LHQT49Ps-c0mAoXQ--7lkAjeuJENQqXxBaB0x7_uCW9tFTl5-368p2EThAbJQkYoBXnoT-HORppt8Bfvupc1skghOpIVqLLWZlL5aAJpHFHj72xoFQ5Hb2z3vAM1dmzQPYnf1TURL3pRmEcKugGV1PMQind2n7PMfCKXpfQnuABkN1fTkB8yBR2U7FBok"/>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Welcome Section -->
+<section class="mb-8">
+<div class="flex flex-col gap-2">
+<h2 class="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+                    ¡Hola, Carlos!
+                </h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl">
+                    El Mundial continúa con fuerza. <span class="text-primary-dark dark:text-primary font-semibold">¡No olvides hacer tus pronósticos para los partidos de hoy!</span>
+</p>
+</div>
+</section>
+<!-- Stats Grid (KPIs) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+<!-- Puntos Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex items-center justify-between group hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Puntos Acumulados</span>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-bold text-slate-900 dark:text-white">1,250</span>
+<span class="flex items-center text-sm font-bold text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                            +15 pts
+                        </span>
+</div>
+</div>
+<div class="size-14 rounded-full bg-accent-gold/10 flex items-center justify-center text-accent-gold">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+<!-- Ranking Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex items-center justify-between group hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Posición Global</span>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-bold text-slate-900 dark:text-white">#42</span>
+<span class="flex items-center text-sm font-bold text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-sm mr-1">arrow_upward</span>
+                            3 puestos
+                        </span>
+</div>
+</div>
+<div class="size-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined text-3xl">leaderboard</span>
+</div>
+</div>
+</section>
+<!-- Actions Section -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Acciones Rápidas</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Ver Partidos Action -->
+<a class="group relative flex flex-col justify-end overflow-hidden rounded-xl aspect-[4/3] sm:aspect-video lg:aspect-[4/3] shadow-sm hover:shadow-lg transition-all hover:-translate-y-1" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="soccer ball on green grass field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5S7ZdWTFuRoBmfSZ5GiQNy_USaPg3I3sTZpUQPNCU38u38d_FdqJ0hJCOMUzxNIJxZIfID2fA2LKDrkW1Qfor6MLI4dRySmddTckK-pSPCyHMqXg6dh0mpLEbYF8m3-Ndjs0w0-BGhxs8tQ70ADLPddYBTShvb3OAWYt43zJdsZhwDaAHcY5ZUBOUA4FwXrNgKawTTLWVpTSO57FC6A9gRnANZhPrV54bVgtDo1ig2qMValu92iEqr7ZusyG2cc3HpmHHoXM4kxU');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+<div class="relative p-6 flex flex-col gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-white/20 backdrop-blur-sm text-white mb-2">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Ver Partidos</h4>
+<p class="text-gray-300 text-sm font-medium line-clamp-2">Consulta el calendario y los próximos encuentros.</p>
+</div>
+</a>
+<!-- Mis Pronosticos Action -->
+<a class="group relative flex flex-col justify-end overflow-hidden rounded-xl aspect-[4/3] sm:aspect-video lg:aspect-[4/3] shadow-sm hover:shadow-lg transition-all hover:-translate-y-1" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="person writing on a clipboard" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQaXfW910GF9-s47b6RVr5eFqw6gPOFFm5pwmhivUGG7JKA_7Xoo6dXztlioSlo0z4MZF8swd3NvI8lzlcjYg5PrW9dWGLD3yXrKpzBAbuw99WvZTCiGE9pZkdS2JLDD0gnkCUswOqmcFnw26ESFciLqcBQRomnH6HZv1Vp_eoclQG6MqbmYM_7T8myTXjrDb06s08RQAlecUsuwG6rFeh4gdQOHC9-jq2QOqZIjJeC3yDSR9Wfr6np9mkyYNX_nnSDcC3PVS7GZo');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+<div class="relative p-6 flex flex-col gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-white/20 backdrop-blur-sm text-white mb-2">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Mis Pronósticos</h4>
+<p class="text-gray-300 text-sm font-medium line-clamp-2">Edita tus predicciones y asegura tus puntos.</p>
+</div>
+</a>
+<!-- Tabla General Action -->
+<a class="group relative flex flex-col justify-end overflow-hidden rounded-xl aspect-[4/3] sm:aspect-video lg:aspect-[4/3] shadow-sm hover:shadow-lg transition-all hover:-translate-y-1" href="#">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="stadium crowd cheering with flags" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdSWfjoqqPxTvMwZfeSAbKtAhS3HjaRTP-UTI296isOnU2OHvRPQ5-DiKt-7PWIy0NdpBYzrsW9DS8IPGZVFnBORJVnfbd2P5iKhk-lryr3rRnGuwm76pkRsdoebURnqQwlKJrLXFYxAAqPekk3QjztKkiO0mSKp77yYtzfbcBMI1MXxRuxw1xQJZ_rtoPwXCK_EjyEyyDabj4VC64aSNeO2_2uNXHl_4F6rV7z01qhSD5H3BsavQ_JwFqgtYvWGGhBO9P1GvPz_k');">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+<div class="relative p-6 flex flex-col gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-white/20 backdrop-blur-sm text-white mb-2">
+<span class="material-symbols-outlined">podium</span>
+</div>
+<h4 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Tabla General</h4>
+<p class="text-gray-300 text-sm font-medium line-clamp-2">Compara tu rendimiento con otros jugadores.</p>
+</div>
+</a>
+</div>
+</section>
+<!-- Optional: Next Match Teaser (Bonus for engagement) -->
+<section class="mt-10">
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg">
+<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">sports_soccer</span>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded animate-pulse">EN VIVO</span>
+<span class="text-slate-400 text-sm font-medium">Fase de Grupos - Grupo C</span>
+</div>
+<div class="flex items-center gap-4 text-2xl sm:text-3xl font-bold">
+<span>Argentina</span>
+<span class="text-slate-500 text-xl">vs</span>
+<span>México</span>
+</div>
+<p class="text-slate-400 mt-2 text-sm">El partido comienza en 2 horas.</p>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-slate-900 font-bold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-primary/20 whitespace-nowrap w-full sm:w-auto">
+                        Pronosticar ahora
+                    </button>
+</div>
+</div>
+</section>
+</main>
+</body></html>

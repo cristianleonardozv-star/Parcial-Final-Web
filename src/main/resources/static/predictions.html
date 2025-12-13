@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MundialScore - Mis Pronósticos</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-dark": "#25b860",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                        "text-main": "#0e1b13",
+                        "text-secondary": "#4e976b",
+                        "accent-gold": "#fbbf24",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-text-main dark:text-gray-100">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 flex items-center justify-between border-b border-[#e7f3ec] dark:border-gray-800 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-sm px-6 lg:px-10 py-3 shadow-sm transition-colors duration-200">
+        <div class="flex items-center gap-4">
+            <h2 class="text-text-main dark:text-white text-xl font-bold leading-tight tracking-tight">MundialScore</h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-primary font-semibold text-sm leading-normal hover:text-primary-dark transition-colors"
+                href="dashboard.html">Inicio</a>
+            <a class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="matches.html">Partidos</a>
+            <a class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="leaderboard.html">Ranking</a>
+        </nav>
+    </header>
+    <main class="flex-1 w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 lg:py-12">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+            <div class="flex flex-col gap-2">
+                <h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">
+                    Mis Pronósticos</h1>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-4" id="predictions-container">
+            <div class="text-center text-gray-500">Cargando pronósticos...</div>
+        </div>
+    </main>
+
+    <script>
+        const authHeader = localStorage.getItem('authHeader');
+        if (!authHeader) window.location.href = 'login.html';
+
+        async function loadPredictions() {
+            try {
+                const response = await fetch('/api/predictions/me', {
+                    headers: { 'Authorization': authHeader }
+                });
+                if (response.ok) {
+                    const predictions = await response.json();
+                    renderPredictions(predictions);
+                } else {
+                    if (response.status === 401) {
+                        window.location.href = 'login.html';
+                    } else {
+                        throw new Error('Server returned ' + response.status);
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('predictions-container').innerHTML = `
+                    <div class="text-center text-red-500 flex flex-col items-center gap-2">
+                        <span class="material-symbols-outlined text-4xl">error</span>
+                        <p>Error al cargar pronósticos. Por favor intenta más tarde.</p>
+                        <p class="text-xs text-gray-400">Detalle: ${e.message}</p>
+                    </div>`;
+            }
+        }
+
+        function renderPredictions(predictions) {
+            const container = document.getElementById('predictions-container');
+            container.innerHTML = '';
+
+            if (predictions.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500">No tienes pronósticos registrados.</div>';
+                return;
+            }
+
+            predictions.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'group bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-5 mb-4';
+                card.innerHTML = `
+                <div class="flex items-center justify-between">
+                     <span class="font-bold">${p.homeTeam} vs ${p.awayTeam}</span>
+                     <div class="flex items-center gap-4">
+                        <span class="text-sm">Tu Pronóstico: <span class="font-bold">${p.predictedHomeGoals} - ${p.predictedAwayGoals}</span></span>
+                        <span class="bg-primary/20 text-primary-dark px-2 py-1 rounded text-xs font-bold">+${p.points || 0} Pts</span>
+                     </div>
+                </div>
+            `;
+                container.appendChild(card);
+            });
+        }
+
+        loadPredictions();
+    </script>
+</body>
+
+</html>

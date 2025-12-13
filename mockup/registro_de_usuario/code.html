@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Registro</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-hover": "#25c265",
+                        "background-light": "#f8fcfa",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c23",
+                        "text-main": "#0e1b13",
+                        "text-muted": "#4e976b",
+                        "border-color": "#e7f3ec",
+                        "input-border": "#d0e7d9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white transition-colors duration-200">
+<div class="flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-solid border-border-color dark:border-white/10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-6 lg:px-10 py-3">
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="flex items-center justify-center size-8 rounded bg-primary/20 text-primary">
+<span class="material-symbols-outlined">sports_soccer</span>
+</div>
+<h2 class="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">MundialScore</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-text-main dark:text-gray-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Inicio</a>
+<a class="text-text-main dark:text-gray-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Reglas</a>
+<a class="text-text-main dark:text-gray-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Premios</a>
+</div>
+<div class="flex items-center gap-4 ml-4 pl-4 border-l border-border-color dark:border-white/10">
+<a class="text-text-main dark:text-white text-sm font-medium" href="#">Iniciar sesión</a>
+</div>
+</div>
+<div class="md:hidden">
+<button class="text-text-main dark:text-white p-1">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Split Screen for Desktop -->
+<main class="flex-grow flex flex-col lg:flex-row">
+<!-- Left Side: Form -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center px-6 py-12 lg:px-20 xl:px-32">
+<div class="w-full max-w-[480px] mx-auto">
+<!-- Headlines -->
+<div class="mb-8">
+<h1 class="text-text-main dark:text-white tracking-tight text-[32px] font-bold leading-tight mb-2">Únete a MundialScore</h1>
+<p class="text-text-muted dark:text-gray-400 text-base font-normal leading-normal">Predice los resultados, acumula puntos y gana premios exclusivos.</p>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5">
+<!-- Username Field -->
+<div class="flex flex-col gap-1.5">
+<label class="text-text-main dark:text-gray-200 text-sm font-medium leading-normal">Usuario</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</span>
+<input class="w-full rounded-lg border border-input-border dark:border-white/20 bg-surface-light dark:bg-surface-dark text-text-main dark:text-white h-12 pl-11 pr-4 placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-base" placeholder="Tu nombre de usuario" type="text"/>
+</div>
+</div>
+<!-- Email Field -->
+<div class="flex flex-col gap-1.5">
+<label class="text-text-main dark:text-gray-200 text-sm font-medium leading-normal">Correo electrónico</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</span>
+<input class="w-full rounded-lg border border-input-border dark:border-white/20 bg-surface-light dark:bg-surface-dark text-text-main dark:text-white h-12 pl-11 pr-4 placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-base" placeholder="ejemplo@correo.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<label class="text-text-main dark:text-gray-200 text-sm font-medium leading-normal">Contraseña</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</span>
+<input class="w-full rounded-lg border border-input-border dark:border-white/20 bg-surface-light dark:bg-surface-dark text-text-main dark:text-white h-12 pl-11 pr-11 placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-base" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<p class="text-xs text-text-muted mt-0.5">Mínimo 8 caracteres</p>
+</div>
+<!-- Confirm Password Field -->
+<div class="flex flex-col gap-1.5">
+<label class="text-text-main dark:text-gray-200 text-sm font-medium leading-normal">Confirmar contraseña</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
+<span class="material-symbols-outlined text-[20px]">lock_reset</span>
+</span>
+<input class="w-full rounded-lg border border-input-border dark:border-white/20 bg-surface-light dark:bg-surface-dark text-text-main dark:text-white h-12 pl-11 pr-4 placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-base" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Terms & Conditions -->
+<div class="flex items-start gap-3 mt-2">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 border border-input-border rounded bg-surface-light focus:ring-primary text-primary" id="terms" type="checkbox"/>
+</div>
+<label class="text-sm text-text-muted dark:text-gray-400" for="terms">
+                                Acepto los <a class="text-text-main dark:text-white font-medium underline hover:text-primary decoration-primary/30" href="#">Términos y Condiciones</a> y la <a class="text-text-main dark:text-white font-medium underline hover:text-primary decoration-primary/30" href="#">Política de Privacidad</a>.
+                            </label>
+</div>
+<!-- Submit Button -->
+<button class="mt-4 flex items-center justify-center w-full h-12 rounded-lg bg-primary hover:bg-primary-hover text-[#0e1b13] font-bold text-base transition-all transform active:scale-[0.98] shadow-sm" type="button">
+                            Crear cuenta
+                        </button>
+<!-- Divider -->
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-input-border dark:border-white/10"></div>
+<span class="flex-shrink-0 mx-4 text-xs text-text-muted uppercase font-medium tracking-wider">O regístrate con</span>
+<div class="flex-grow border-t border-input-border dark:border-white/10"></div>
+</div>
+<!-- Google Button -->
+<button class="flex items-center justify-center gap-3 w-full h-12 rounded-lg border border-input-border dark:border-white/20 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 text-text-main dark:text-white font-medium text-sm transition-colors" type="button">
+<svg class="size-5" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9494 17.5885 17.2678 16.323 18.1056V21.1039H20.19C22.4608 19.0139 23.766 15.9274 23.766 12.2764Z" fill="#4285F4"></path><path d="M12.2401 24.0008C15.4766 24.0008 18.2059 22.9382 20.1945 21.1039L16.3275 18.1055C15.2517 18.8375 13.8627 19.252 12.2445 19.252C9.11388 19.252 6.45946 17.1399 5.50705 14.3003H1.5166V17.3912C3.55371 21.4434 7.7029 24.0008 12.2401 24.0008Z" fill="#34A853"></path><path d="M5.50253 14.3003C5.00236 12.8199 5.00236 11.1799 5.50253 9.69951V6.60861H1.51649C-0.18551 10.0056 -0.18551 13.9945 1.51649 17.3915L5.50253 14.3003Z" fill="#FBBC05"></path><path d="M12.2401 4.74966C13.9509 4.7232 15.6044 5.36697 16.8439 6.54867L20.2695 3.12262C18.1001 1.0855 15.2208 -0.0344664 12.2401 0.000808666C7.7029 0.000808666 3.55371 2.55822 1.5166 6.60861L5.50264 9.69951C6.45064 6.85983 9.10947 4.74966 12.2401 4.74966Z" fill="#EA4335"></path></svg>
+                            Continuar con Google
+                        </button>
+</form>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<p class="text-sm text-text-muted dark:text-gray-400">
+                            ¿Ya tienes una cuenta? 
+                            <a class="text-primary hover:text-primary-hover font-semibold transition-colors" href="#">Inicia sesión aquí</a>
+</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Visual -->
+<div class="hidden lg:flex w-1/2 relative bg-[#0e1b13] overflow-hidden items-center justify-center">
+<!-- Abstract Background Elements -->
+<div class="absolute inset-0 bg-gradient-to-br from-background-dark via-[#1a2c23] to-[#0a140f] opacity-90 z-10"></div>
+<!-- Pattern Overlay -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#30e87a 1px, transparent 1px); background-size: 32px 32px;"></div>
+<!-- Main Image -->
+<img alt="Soccer ball in net with dramatic lighting" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50 z-0" data-alt="Soccer ball in a goal net with dramatic stadium lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARQBPCylzyqJtC0QAVRvjcw3TNS9nbXaP3tm4XAe_Xg_9VCpHerH2PVJqpcs0WBGvUdlDD2B5JWLv1oSFMJSpJRnzixykB7xCmrgq3L0DLDk-PtrOlj0V7XYS-oJq_TjevaIwjWxVOyn_z2SoIy20LsnjEZ_HzKXM6nCMj8y9aH8dOoMv92aVN959jFC3y_3LS0zzCpFtXXSwhtOiMCDR-vt6T6blqBniifcKMg8wI21RObzCvYNxWqV9oikifXVffh4sKYlR9MLY"/>
+<div class="relative z-20 max-w-lg px-12 text-center">
+<div class="inline-flex items-center justify-center size-16 rounded-full bg-primary/20 text-primary mb-6 ring-1 ring-primary/30">
+<span class="material-symbols-outlined text-[32px]">emoji_events</span>
+</div>
+<h3 class="text-3xl font-bold text-white mb-4">Compite con amigos</h3>
+<p class="text-gray-300 text-lg font-light leading-relaxed">
+                        Crea ligas privadas, predice los marcadores del mundial y demuestra quién es el verdadero experto en fútbol.
+                    </p>
+<!-- Stats / Social Proof mockup -->
+<div class="mt-10 flex justify-center gap-2">
+<div class="flex -space-x-3">
+<img alt="User Avatar 1" class="w-10 h-10 rounded-full border-2 border-[#0e1b13]" data-alt="Portrait of a user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUU9tQWPdf30Lld4w49NXrlENIOJsccJilf4ZUNsTroabTRo7lX6KY5NYA15DjsTScGBD35kTNBZycevzxMGafhjoRxqte-rWmmvEzT_UYPVpZGNAyK5gseLdYGSSLyZo4UMNK5f5AwpECkyYDNMQCzJV8XZSOKdUEqT_gX7aDlqOFrxCeWm40fDKaPe6aMQgmr7ljgeOqHAZzuXK6EPxEjCikny6fxwGaC7tab-m32yF-Aih1NoT8ne8m4C--CsbLVF0LUiQMKho"/>
+<img alt="User Avatar 2" class="w-10 h-10 rounded-full border-2 border-[#0e1b13]" data-alt="Portrait of a user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB881rZSRWEzjagILnOVmFkKeMozCLErAPrA7sKF6mwwL11G5zgQRCf02r0mVDxiPEHw3Zy1pH0iB6xN7l4Vv7z1Amn7JbGdcuvxxGDQr3kkGIL4QRue9Ehf2LTsVm_HHa6hUUH7VDmrfso4WOoNQvKB-X1qVzsFlPGt04baSNBY6DOsx0-zPukfwqhmHfzN1fp0pErIYtyiSuvx480hjoAujFAB28vmDHYvHIZaLDEq4nU9adpbQqCZ2eShpauEW9x0TgROnKZD-w"/>
+<img alt="User Avatar 3" class="w-10 h-10 rounded-full border-2 border-[#0e1b13]" data-alt="Portrait of a user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlBkFoQdp2JLh0TL_8DjK5YKwOObSMfdw-tlLiOWZ_GDARekx7CQMPnutdXFC1wzqMtiuwU6zCKC7XWvY3IPGIca6NKxkAccwdTSCXJ55SWDX0S3SYkRGxtiFHSvip79UyW5SyxNs9u3OmLVG_c31zX4yqKArxlKB2YD3Z-X85BtDsR3uvuXNPN0EK45nTa3NEbHLUgaTXfZA556GtyHx8R4MSfbXBdapnNTgXA4095FDCdWmP8esLl8ni60JFehLEzjL-4-D6oKM"/>
+</div>
+<div class="flex items-center px-4 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
+<span class="text-white text-sm font-medium">+20k usuarios activos</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

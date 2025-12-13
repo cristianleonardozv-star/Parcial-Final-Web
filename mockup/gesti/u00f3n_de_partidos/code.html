@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestión de Partidos - MundialScore</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a", 
+                        "primary-dark": "#25b05c",
+                        "accent": "#facc15", // Yellow/Gold
+                        "background-light": "#f8fcfa",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                        "text-main": "#0e1b13",
+                        "text-secondary": "#4e976b",
+                        "border-color": "#e7f3ec"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-border-color bg-surface-light px-6 py-3 shadow-sm dark:bg-surface-dark dark:border-gray-800 lg:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main dark:text-white">
+<div class="flex size-8 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined">sports_soccer</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">MundialScore <span class="text-text-secondary dark:text-gray-400 font-normal text-sm">Admin</span></h2>
+</div>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-sm font-medium text-text-secondary hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-bold text-text-main border-b-2 border-primary pb-0.5 dark:text-white" href="#">Partidos</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary" href="#">Usuarios</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary" href="#">Configuración</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="hidden lg:flex relative items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-secondary dark:text-gray-500 text-[20px]">search</span>
+<input class="h-10 w-64 rounded-full border border-border-color bg-background-light py-2 pl-10 pr-4 text-sm text-text-main placeholder-text-secondary focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-500" placeholder="Buscar..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative rounded-full p-2 text-text-secondary hover:bg-background-light hover:text-primary dark:text-gray-400 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute right-2 top-2 size-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+<div class="h-8 w-[1px] bg-border-color dark:bg-gray-700"></div>
+<div class="flex items-center gap-3 cursor-pointer">
+<div class="h-9 w-9 overflow-hidden rounded-full border border-border-color bg-gray-100 dark:border-gray-700" data-alt="Admin user avatar">
+<img alt="Admin Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMENPdbGNQInOzYJfIUu0vcIYzd-PJ5wnMT54baJj8x5xms9bBG0MkEqAFYyoworgpdsi8O7vDfSbzOhur0PMPdFQhrA5LYlCIMQGCxTCCKFASIXxq3wAnxy6uO9DaCmEIiLxXghrwgIDSCuDqiwY_lGmV3LIIKkHVAj1L86ejFREPnfJBzOi4pmXzrJb4ju9zCVBbTGMdtxSN-gpWMhEBJjjpgU6EUbAx5wyFpbz_m0Uh-0DKsP7Fy7R6gudlTRJQB_24l6h5XMU"/>
+</div>
+<div class="hidden lg:block text-left">
+<p class="text-sm font-semibold leading-none text-text-main dark:text-white">Admin User</p>
+<p class="text-xs text-text-secondary dark:text-gray-400">Super Admin</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary dark:text-gray-400 text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 py-8 lg:px-10">
+<div class="mx-auto max-w-7xl">
+<!-- Breadcrumbs -->
+<nav class="mb-6 flex items-center text-sm text-text-secondary dark:text-gray-400">
+<a class="hover:text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+                        Inicio
+                    </a>
+<span class="mx-2">/</span>
+<span class="font-semibold text-text-main dark:text-white">Gestión de Partidos</span>
+</nav>
+<!-- Page Header -->
+<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+<div>
+<h1 class="text-3xl font-black tracking-tight text-text-main dark:text-white sm:text-4xl">Gestión de Partidos</h1>
+<p class="mt-2 text-text-secondary dark:text-gray-400">Administra los resultados y estados de todos los encuentros del torneo.</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-[#0e1b13] shadow-sm hover:bg-primary-dark hover:text-white transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Nuevo Partido
+                    </button>
+</div>
+<!-- Filters & Controls -->
+<div class="mb-6 grid grid-cols-1 gap-4 rounded-xl bg-surface-light p-4 shadow-sm border border-border-color dark:bg-surface-dark dark:border-gray-800 lg:grid-cols-12 lg:items-center">
+<!-- Search Input -->
+<div class="lg:col-span-4 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="w-full rounded-lg border border-border-color bg-background-light py-2.5 pl-10 pr-4 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white" placeholder="Buscar por equipo o estadio..." type="text"/>
+</div>
+<!-- Filter Dropdowns -->
+<div class="lg:col-span-5 flex flex-col sm:flex-row gap-4">
+<div class="relative flex-1">
+<select class="w-full appearance-none rounded-lg border border-border-color bg-background-light py-2.5 pl-4 pr-10 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+<option>Todos los Grupos</option>
+<option>Grupo A</option>
+<option>Grupo B</option>
+<option>Fase Final</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+<div class="relative flex-1">
+<select class="w-full appearance-none rounded-lg border border-border-color bg-background-light py-2.5 pl-4 pr-10 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+<option>Cualquier Estado</option>
+<option>Programado</option>
+<option>En Juego</option>
+<option>Finalizado</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Date Picker (Mock) -->
+<div class="lg:col-span-3">
+<div class="relative">
+<input class="w-full rounded-lg border border-border-color bg-background-light py-2.5 pl-4 pr-4 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-700 dark:text-white" type="date"/>
+</div>
+</div>
+</div>
+<!-- Matches Table -->
+<div class="overflow-hidden rounded-xl border border-border-color bg-surface-light shadow-sm dark:bg-surface-dark dark:border-gray-800">
+<div class="overflow-x-auto">
+<table class="w-full min-w-[1000px] border-collapse">
+<thead>
+<tr class="border-b border-border-color bg-background-light/50 dark:border-gray-800 dark:bg-gray-800/50">
+<th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400">Fecha / Hora</th>
+<th class="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400 w-1/4">Encuentro</th>
+<th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400">Grupo / Fase</th>
+<th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400">Estadio</th>
+<th class="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400">Estado</th>
+<th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-color dark:divide-gray-800">
+<!-- Match Row 1: Finished -->
+<tr class="group hover:bg-background-light dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-text-main dark:text-white">20 Nov</span>
+<span class="text-sm text-text-secondary dark:text-gray-400">17:00</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-4">
+<div class="flex items-center gap-2 w-32 justify-end">
+<span class="font-bold text-text-main dark:text-white">Qatar</span>
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Qatar">
+<img alt="Qatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7T3bYT_a7yWl4vkuViGa0BlMKD43ucBXUG3WugX9YQyiwBMrt7V4T7X2yqGGziS4eAt38iE63SWMXyLEBcYka_CInZyb0dnBNW2MnYSzjevIexYI-jq2PMAw8qbqNJGxFaXTn619Kh_LXR8fwMP2FjsRyhlPyWmqS7v0pbOswpTDEb6Ts1v8Xxt8nj6cBmlGPrdbKHXCkqnTh_w4e2hPAwOWhi6qEllIH0uxSiRB_YmGjCjFnFxPOIABOuKb9-d-cN3d4mDHgJHo"/>
+</div>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-gray-100 px-3 py-1 font-mono font-bold text-text-main dark:bg-gray-700 dark:text-white text-lg">
+                                                0 - 2
+                                            </div>
+<div class="flex items-center gap-2 w-32 justify-start">
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Ecuador">
+<img alt="Ecuador" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4gudqKrtx28SinpWHO-9VZd8MZ3Vc4vRDifYIIBiw1tei5BiSxdWz0Y6LmcKGgh2FkKd7tMYtUhg1EmzoDKO8weY8E1pIDSaJYBc9CDj6AaksRDpDbjz5putJYSlCTEHqrX923-zj2-hUOR1OvULOB-6dqX6mHCCj53pW0Swk7qsf7HUrXzYRXLxZlKjfQD24igN0lUYZ8lzKtPaaHuZyJqoU7GThIKFjeBpo2y-mLy5A5cGmpXm0rwlVjSpY3Bf2MWGPBU5OV7o"/>
+</div>
+<span class="font-bold text-text-main dark:text-white">Ecuador</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30">Grupo A</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary dark:text-gray-400">
+                                        Al Bayt Stadium
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+<span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span>
+                                            Finalizado
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-text-secondary hover:text-primary font-medium text-sm inline-flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                            Editar
+                                        </button>
+</td>
+</tr>
+<!-- Match Row 2: Live -->
+<tr class="group bg-green-50/30 hover:bg-green-50/50 dark:bg-green-900/10 dark:hover:bg-green-900/20 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-text-main dark:text-white">21 Nov</span>
+<span class="text-sm text-text-secondary dark:text-gray-400">14:00</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-4">
+<div class="flex items-center gap-2 w-32 justify-end">
+<span class="font-bold text-text-main dark:text-white">Senegal</span>
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Senegal">
+<img alt="Senegal" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlNhMx_M-l8bvKpfQYA_h3jmou3k1JlreyQLYkRserxYWZT-YAwsQ7Xcz18Uoj4--6jIGiiHPtlJZOxiV8uDqBpzRKMETqz7BYoBSoQ3FE37J0iDeHIZwt9QRFwD8E4Us0uetK9yI65BamgoAncZ5o_GVnIl0dpJrR7fY5icXXhZHyzmr1Y2AmyIJHwRtyZOo_CDvtVkwXYyocp65APSDd4Tl7cRQW1Pgr7BrVbPrmA1ceHhQnzGnMBC9qkRBW5u7WQ__VeDGZV4Q"/>
+</div>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-white border border-primary/30 px-3 py-1 font-mono font-bold text-primary dark:bg-gray-800 dark:border-primary/30 text-lg shadow-sm">
+                                                1 - 1
+                                            </div>
+<div class="flex items-center gap-2 w-32 justify-start">
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Netherlands">
+<img alt="Netherlands" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjrcB05EjQXTHHk7YX26RVLTUNyVwsAup-uqGigF8s-ZWISv7qFRxbPlxDjlLouAEoF-eedUC6xlqxh2RQs2oAuuH0hqMo5g8iyss38iuLfKBKMOEJxiDm6dWRDTjDhxsHanPPdgLhW9h3MQp-mH22w3vV6NBtpgTT4ufyXWhZdxudV3qJ29-3V8L1DFBSlixRffP8T6l8rvdApeMU68do4QaD6h0QGiS-sNNKFQanCu0sU_utOootm5Uaav5JBP5EuGdGpiR0PQg"/>
+</div>
+<span class="font-bold text-text-main dark:text-white">P. Bajos</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30">Grupo A</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary dark:text-gray-400">
+                                        Al Thumama Stadium
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700 animate-pulse dark:bg-red-900/30 dark:text-red-400">
+<span class="h-1.5 w-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
+                                            EN JUEGO (75')
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-[#0e1b13] shadow-sm hover:bg-primary-dark hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px] mr-1">scoreboard</span>
+                                            Actualizar
+                                        </button>
+</td>
+</tr>
+<!-- Match Row 3: Scheduled -->
+<tr class="group hover:bg-background-light dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-text-main dark:text-white">21 Nov</span>
+<span class="text-sm text-text-secondary dark:text-gray-400">16:00</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-4">
+<div class="flex items-center gap-2 w-32 justify-end">
+<span class="font-bold text-text-main dark:text-white">Inglaterra</span>
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of England">
+<img alt="England" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClRQK322MVQ-B9Qixf11KdUyCqOw69lwBojBKG8X1KaP3yXDeG-xMg2w64dTS1aHMZHxWuPOOuJXzMsHMEnBHx2JlOYhEzRlAo61KLM68EFysZMy5p9K6JmolNGyWa51C0u3nVCKLqXionQ-4QjCEXWSsEEoGQE-O68nLgfR9SC9jpKakuD1SRpX16cet4AN6hy_vtl073awSzmbIMBM44TG5ga2cqUorcLA6QQjBOZT07aeyXdnPw6qywDp6O_iFsLzHkMPkT8uo"/>
+</div>
+</div>
+<div class="text-xs text-text-secondary dark:text-gray-500 font-medium">VS</div>
+<div class="flex items-center gap-2 w-32 justify-start">
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Iran">
+<img alt="Iran" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR9n2IK9iRsKFdfHJrgLTq6bddM_eF4dcCzvppt1LGHRYF77YZkt3VT-H0NCqOS_lFdLaw_KeOXsD37BM0uBmW8jQSseAzG-8oa1pLmP_vUjqVUaezrSlAtTuA2S4oZCsKEoie2yY6n9o7qKwJNpYvYRx8AmyrXtLIZq6gt9OeMRIGFVezNm79qSucpSKonObnb9ymhHL9wAJOymtHqDdhPZf2ECimhv5yvnq4BaCcRcWjbu_98KJhv7-wdmii1OmtUQfVEyfJVZI"/>
+</div>
+<span class="font-bold text-text-main dark:text-white">Irán</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30">Grupo B</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary dark:text-gray-400">
+                                        Khalifa Int. Stadium
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                                            Programado
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg bg-primary/20 hover:bg-primary hover:text-[#0e1b13] px-4 py-2 text-sm font-bold text-primary-dark shadow-sm transition-all dark:text-primary dark:hover:text-[#0e1b13]">
+                                            Registrar resultado
+                                        </button>
+</td>
+</tr>
+<!-- Match Row 4: Scheduled -->
+<tr class="group hover:bg-background-light dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-text-main dark:text-white">21 Nov</span>
+<span class="text-sm text-text-secondary dark:text-gray-400">22:00</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-4">
+<div class="flex items-center gap-2 w-32 justify-end">
+<span class="font-bold text-text-main dark:text-white">EE.UU.</span>
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of USA">
+<img alt="USA" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7MiJCRme99r8VmUZckhAucKcd9V-pr2jsAkM4J9xf5Nr-Yhxi0m8Tj4gymFyj3-x2PbTgUTpdl6vAvvWCZTELtdxK3nkq3C01AV1yj6yN1iW9A9x7hFr3Emrc-kyaMNqS3BxggFOzhjFfwuDj3s9KSvxQKtCUGF8jZTgk9trFpNAOBNw9Lw4_CnpFHpZBABailUNbgLFGZrMjLrBeQuoEdZVu882pBE4veBOitqXVEmtj4rNcmeSzRB6szZf8PuprshxtWkHtnIA"/>
+</div>
+</div>
+<div class="text-xs text-text-secondary dark:text-gray-500 font-medium">VS</div>
+<div class="flex items-center gap-2 w-32 justify-start">
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Wales">
+<img alt="Wales" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp6LQFX_t2aK5OHOlDugTHaXVUtMUXfNKSh1F1XXijb_viBM4sTIgJj4ewa9o2y7AyF6C5OBQeitOyz3k4wM3WfzsPFMqDveflp3DPDG0Ue8VTHPg0CnTTSgS7cc0B3sGK7EecUadO-PeVkPKbLrwKlpjzILpsn5P7hOuunu3u41D8eTkRO3pUGRPUVyxD1CckEKvFVnDDciw7xWtYnyJuE8IN8x47RPRpEt9JQfzdPKQUleJQkmNUoN4rKaZbGiA6SW-laRyUUpM"/>
+</div>
+<span class="font-bold text-text-main dark:text-white">Gales</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30">Grupo B</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary dark:text-gray-400">
+                                        Ahmad bin Ali Stadium
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                                            Programado
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg bg-primary/20 hover:bg-primary hover:text-[#0e1b13] px-4 py-2 text-sm font-bold text-primary-dark shadow-sm transition-all dark:text-primary dark:hover:text-[#0e1b13]">
+                                            Registrar resultado
+                                        </button>
+</td>
+</tr>
+<!-- Match Row 5: Scheduled -->
+<tr class="group hover:bg-background-light dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-text-main dark:text-white">22 Nov</span>
+<span class="text-sm text-text-secondary dark:text-gray-400">13:00</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-4">
+<div class="flex items-center gap-2 w-32 justify-end">
+<span class="font-bold text-text-main dark:text-white">Argentina</span>
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Argentina">
+<img alt="Argentina" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxnmmDdkQ--VI6su0woCy-vY__nD2Yy6qTH0fgA9P7IRxfWHBa_QKBCzjCVopSdWtvISHcVcs3pyxZrIg0Z-ehc-0VQVazDOcy8wmC3n4st4gZRQcKDV17ca1aFWAAAfCmpwC_aCIQOY4yafFdEwxyonPkV95CsH3W7nQiM5H92FQY-tT2zCqfDl1vv-BpVZqe6sRS7gcrEqxxcw28m3jzNWCuXa9KJiNrXrZb0iGY0NYifs9nn_mSgRQgfwzJTYe69_8STO97U6E"/>
+</div>
+</div>
+<div class="text-xs text-text-secondary dark:text-gray-500 font-medium">VS</div>
+<div class="flex items-center gap-2 w-32 justify-start">
+<div class="h-8 w-8 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Saudi Arabia">
+<img alt="Saudi Arabia" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs4tnZXfQixYPfyutHRjmZPQaiyRXxp99nvi9aSTfAXxmx7KP6NlDbfZHX-rqFZ2NE-FLmk3iakn1m-g_Y4lS6ihEcmmRKRda5zH2gSkCLaars3iCXXc_79duGvX4QUSUkovlW9vvkgAo9rdCk7_jrdAhagQgY6sdJ3pfAXEycONUbjtXTszEWXKCo2vLRZC2b8fetTK1qg6EU8T2Kz3ZsVbBNKM7RKPRLUuQPELzdVV-ham3TLhm2ecad-Ud4qd74eeg2R9-XpbY"/>
+</div>
+<span class="font-bold text-text-main dark:text-white">A. Saudita</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-700/10 dark:bg-amber-400/10 dark:text-amber-400 dark:ring-amber-400/30">Grupo C</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary dark:text-gray-400">
+                                        Lusail Stadium
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                                            Programado
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center justify-center rounded-lg bg-primary/20 hover:bg-primary hover:text-[#0e1b13] px-4 py-2 text-sm font-bold text-primary-dark shadow-sm transition-all dark:text-primary dark:hover:text-[#0e1b13]">
+                                            Registrar resultado
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-border-color bg-surface-light px-4 py-3 sm:px-6 dark:bg-surface-dark dark:border-gray-800">
+<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-text-secondary dark:text-gray-400">
+                                    Mostrando <span class="font-medium text-text-main dark:text-white">1</span> a <span class="font-medium text-text-main dark:text-white">5</span> de <span class="font-medium text-text-main dark:text-white">64</span> resultados
+                                </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 dark:ring-gray-700 dark:hover:bg-gray-800" href="#">
+<span class="sr-only">Anterior</span>
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-[#0e1b13] focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-text-main ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 dark:text-white dark:ring-gray-700 dark:hover:bg-gray-800" href="#">2</a>
+<a class="relative hidden items-center px-4 py-2 text-sm font-semibold text-text-main ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex dark:text-white dark:ring-gray-700 dark:hover:bg-gray-800" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0 dark:text-gray-400 dark:ring-gray-700">...</span>
+<a class="relative hidden items-center px-4 py-2 text-sm font-semibold text-text-main ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex dark:text-white dark:ring-gray-700 dark:hover:bg-gray-800" href="#">12</a>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 dark:ring-gray-700 dark:hover:bg-gray-800" href="#">
+<span class="sr-only">Siguiente</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Score Input Modal (Visible for demo purposes, styled as an overlay) -->
+<!-- In a real app, this would be hidden by default and toggled via JS -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+<div class="w-full max-w-md transform overflow-hidden rounded-2xl bg-surface-light p-6 shadow-2xl transition-all dark:bg-surface-dark border border-border-color dark:border-gray-700">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-lg font-bold leading-6 text-text-main dark:text-white">Registrar Resultado</h3>
+<button class="rounded-full p-1 text-text-secondary hover:bg-background-light dark:hover:bg-gray-800">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="mb-6 rounded-lg bg-background-light p-4 dark:bg-gray-800/50">
+<div class="text-center text-xs font-medium uppercase text-text-secondary dark:text-gray-400 mb-2">Grupo B - Jornada 1</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="h-12 w-12 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of England">
+<img alt="England" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_7fEzmTTu61RAviiPCUBKIswWvu3Gl4nc0CSa-kgICDX_TSzBKTl5naL7G53e0qW2DDcNBSPlNtVdT53gTQhJAnglmuuwwLo20GKtgdWC3cUNC8dyMAUjPB1QPqIaIuxQZXANZgiq3kMhGMRzHE51EU8jp2EZHEK38Xww6N0Vx5NjiC32lc98-sxFJO_mSdU52z2eL2TeM9Xx4ZqOiZETmJd_9iD2DS8MskIODsJVtifkTu4M9QRs6ziYIN4jqhGnDpnsnprD_gc"/>
+</div>
+<span class="text-sm font-bold text-text-main dark:text-white">Inglaterra</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="h-12 w-14 rounded-lg border border-border-color bg-surface-light text-center text-2xl font-bold text-text-main focus:border-primary focus:ring-2 focus:ring-primary dark:bg-gray-900 dark:border-gray-700 dark:text-white" min="0" type="number" value="0"/>
+<span class="text-xl font-bold text-text-secondary dark:text-gray-500">:</span>
+<input class="h-12 w-14 rounded-lg border border-border-color bg-surface-light text-center text-2xl font-bold text-text-main focus:border-primary focus:ring-2 focus:ring-primary dark:bg-gray-900 dark:border-gray-700 dark:text-white" min="0" type="number" value="0"/>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="h-12 w-12 overflow-hidden rounded-full shadow-sm bg-gray-100" data-alt="Flag of Iran">
+<img alt="Iran" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOzGJbLbOFvZbfSH-dThaL2sRFoozifJPl2aBHlb_ehNVR0hWCX7iWFJOjpW7baQLPH9lDNAv_2sLKKQygV2xg6GHHX5VEkHpJwC3Fmw6b6hd2rahsDLXzevT5c-gTDbdT4ihOQR02LvmA4yuNG0PYVihLt4LagYDl-OIyOIhHyzTMXxjK0i4rjTMWkeHU0WPstAVCR8-Df4nDuO9KZhnhsA29uO96PMszByCWqGS8flMgi4-KuXpBQCMf9UiofTjRRFye8Suu7yk"/>
+</div>
+<span class="text-sm font-bold text-text-main dark:text-white">Irán</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<label class="flex items-center gap-2 text-sm text-text-secondary dark:text-gray-400">
+<input class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+                        Marcar partido como finalizado
+                    </label>
+</div>
+<div class="mt-6 flex justify-end gap-3">
+<button class="rounded-lg px-4 py-2 text-sm font-medium text-text-secondary hover:bg-background-light dark:hover:bg-gray-800">Cancelar</button>
+<button class="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-[#0e1b13] hover:bg-primary-dark hover:text-white transition-colors">Guardar Resultado</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -9,5 +9,5 @@ import lombok.*;
 @Builder
 public class LeaderboardRowDto {
     private String username;
-    private long totalPoints;
+    private long score;
 }

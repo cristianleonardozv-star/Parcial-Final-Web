@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Mis Pronósticos</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "background-light": "#f8fcfa",
+                        "background-dark": "#112117",
+                        "accent-yellow": "#fbbf24", // Gold/Yellow for partial hits
+                        "accent-red": "#ef4444",    // Red for misses
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { vertical-align: middle; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-[#0e1b13]">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-[#f8fcfa]/90 backdrop-blur-md border-b border-[#e7f3ec]">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary flex items-center justify-center bg-[#e7f3ec] rounded-full p-1.5">
+<span class="material-symbols-outlined text-xl font-bold">sports_soccer</span>
+</div>
+<h1 class="text-[#0e1b13] text-xl font-bold tracking-tight">MundialScore</h1>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#0e1b13] text-sm font-medium hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="text-[#0e1b13] text-sm font-medium hover:text-primary transition-colors" href="#">Rankings</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-0.5" href="#">Mis Pronósticos</a>
+<a class="text-[#0e1b13] text-sm font-medium hover:text-primary transition-colors" href="#">Reglas</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-[#e7f3ec] transition-colors text-[#0e1b13]">
+<span class="material-symbols-outlined" style="font-size: 24px;">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8tgK_1TPAi4IV10N-b-_GQPKrUaNVY-HrvIc77T1yfBFY94w0zcZgaLW2Hl_AjTWBtm5Gujzh92TeuXsyansE-cVqXXF6r2ETELtBzjgq1Adi-hYW0vBfy3L1EgZgppIrZAdYv0FobmUGMBmxrhvpRqjY1VCW0bpPRAEzklivZimMPP2Cy3jRZCucKBVy1iEuSgdHEFtFPSRe2pmEgud58BnZUZqFg_aSOlRnRPJnjdijh752Tuiofhb5hQzPdM07yO2eaZlbxcQ");'>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow layout-container flex flex-col items-center w-full pb-12">
+<div class="w-full max-w-[960px] px-4 sm:px-6 mt-8 flex flex-col gap-8">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h2 class="text-[#0e1b13] text-3xl sm:text-4xl font-black tracking-tight">Mis Pronósticos</h2>
+<p class="text-[#4e976b] text-base font-normal max-w-2xl">
+                    Consulta tu historial de predicciones. Ganas <strong class="text-[#0e1b13]">5 pts</strong> por resultado exacto, <strong class="text-[#0e1b13]">3 pts</strong> por acertar ganador/empate, y <strong class="text-[#0e1b13]">1 pt</strong> por goles acertados de un equipo.
+                </p>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="flex flex-col p-5 bg-white rounded-xl border border-[#d0e7d9] shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-size: 64px;">leaderboard</span>
+</div>
+<p class="text-[#4e976b] text-sm font-medium mb-1">Puntos Totales</p>
+<div class="flex items-end gap-2">
+<span class="text-[#0e1b13] text-3xl font-bold leading-none">145</span>
+<span class="text-primary text-sm font-bold mb-1">+15 esta semana</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col p-5 bg-white rounded-xl border border-[#d0e7d9] shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-size: 64px;">target</span>
+</div>
+<p class="text-[#4e976b] text-sm font-medium mb-1">Aciertos Exactos</p>
+<div class="flex items-end gap-2">
+<span class="text-[#0e1b13] text-3xl font-bold leading-none">12</span>
+<span class="text-primary text-sm font-bold mb-1">Top 5%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col p-5 bg-white rounded-xl border border-[#d0e7d9] shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-size: 64px;">public</span>
+</div>
+<p class="text-[#4e976b] text-sm font-medium mb-1">Ranking Global</p>
+<div class="flex items-end gap-2">
+<span class="text-[#0e1b13] text-3xl font-bold leading-none">#42</span>
+<span class="text-primary text-sm font-bold mb-1">↑ 5 puestos</span>
+</div>
+</div>
+</div>
+<!-- Controls (Search & Filter) -->
+<div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+<!-- Search -->
+<div class="w-full md:w-auto md:flex-1 max-w-md relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#4e976b]">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-[#e7f3ec] text-[#0e1b13] placeholder-[#4e976b] focus:ring-2 focus:ring-primary focus:bg-white transition-all text-sm font-medium" placeholder="Buscar partido (ej. Brasil)..." type="text"/>
+</div>
+<!-- Chips -->
+<div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#0e1b13] text-white text-sm font-medium transition-colors">
+                        Todos
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] text-[#0e1b13] hover:bg-[#d5e9dd] text-sm font-medium transition-colors">
+                        Finalizados
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] text-[#0e1b13] hover:bg-[#d5e9dd] text-sm font-medium transition-colors">
+                        En Juego
+                    </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] text-[#0e1b13] hover:bg-[#d5e9dd] text-sm font-medium transition-colors">
+                        Pendientes
+                    </button>
+</div>
+</div>
+<!-- Predictions List Header (Desktop only) -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 text-xs font-semibold text-[#4e976b] uppercase tracking-wider">
+<div class="col-span-4">Partido</div>
+<div class="col-span-3 text-center">Tu Pronóstico</div>
+<div class="col-span-3 text-center">Resultado Real</div>
+<div class="col-span-2 text-right">Puntos</div>
+</div>
+<!-- Predictions List Items -->
+<div class="flex flex-col gap-3">
+<!-- Item 1: Exact Match (Success) -->
+<div class="bg-white rounded-xl border border-primary shadow-sm hover:shadow-md transition-shadow p-4 md:px-6 md:py-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative overflow-hidden">
+<!-- Status Strip Mobile -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary md:hidden"></div>
+<!-- Match Info -->
+<div class="col-span-4 flex flex-col justify-center">
+<div class="text-[10px] text-[#4e976b] font-bold uppercase tracking-wider mb-1">Hace 2 horas • Grupo G</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Brazil" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBmIRXD7C0dIkf7RQoXKEY9f-pWKXgvtioZFwfBB6iN5oHzHWrRq_-7A8teALtMjgIo6AZDWcgodXSdjpaG2ZrhmMqQW-jjq4MRtkY0JyKSrow5IwknLaWXjyWh66CjObd737w0n-J1a7-D-aC2lqjaN-xOYWtj61gv49H9eZ61yR31wCV-oJIBLorJd_Bzo2gDmjn5xNqJXNM0ClJkcbOgtfFt-jVt165_FgN0y0QbIILZQhbxjsJbvXOGGYNzHbimvDkKL8vSq4");'></div>
+<span class="font-bold text-[#0e1b13]">BRA</span>
+</div>
+<span class="text-xs text-[#4e976b] font-medium">vs</span>
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Serbia" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEHD7kMlVhAbfb9L8h6f4s77CbPk-D6e3f6rbRl6Hy3vezBYR4XrAtx9c6sjsj2S0bb5W7dTkHO-5b7zYyiKU1effYXBRymnFot-vQWLnrMTEQYa78yk26GUL8EM7u75aurimahPh9OUTMml4tllwbidw9ZyF2m1nRmXid1sY9JBOlVFNYTYT9GxyLbHC5VUONAU3WgPkA6ysvTwZe12Z4OxYxWymQdGSJXwkbkYgkgvqq-oli5AxShv2T3EvGemQ8YjkkZ0wnusw");'></div>
+<span class="font-bold text-[#0e1b13]">SRB</span>
+</div>
+</div>
+</div>
+<!-- User Prediction -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Tu Predicción</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>2</span>
+<span class="text-gray-400">-</span>
+<span>0</span>
+</div>
+</div>
+<!-- Actual Result -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Resultado Final</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>2</span>
+<span class="text-gray-400">-</span>
+<span>0</span>
+</div>
+</div>
+<!-- Points & Status -->
+<div class="col-span-2 flex items-center justify-between md:justify-end gap-3">
+<div class="flex flex-col items-end">
+<span class="text-xl font-black text-primary">+5</span>
+<span class="text-[10px] font-bold text-primary uppercase">Exacto</span>
+</div>
+<div class="size-10 rounded-full bg-[#e7f3ec] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Partial Match (Yellow) -->
+<div class="bg-white rounded-xl border border-l-4 md:border-l border-[#e5e7eb] md:border-accent-yellow shadow-sm hover:shadow-md transition-shadow p-4 md:px-6 md:py-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative">
+<!-- Status Strip Mobile -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-yellow md:hidden"></div>
+<!-- Match Info -->
+<div class="col-span-4 flex flex-col justify-center">
+<div class="text-[10px] text-[#4e976b] font-bold uppercase tracking-wider mb-1">Ayer • Grupo C</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Argentina" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA3htcZPZghlByDQRvIem--KTsA1umXEWkIqydCwu-wJHq0Ylo_K6OTAlxm90r5BLv3v-pTqECNAoT0uaM16eRLUFp3c8DrVmp5KL2inpzO0MJA9BiiZblh7lkM5AWuE8068qmfYIXr61w0frGs1edXIl60OUlTmeTHpdGEuNMIYc0FpCZsYKWAdyKdxHTs7Fjz2kiP04h9L_qpkxtkY9u0cJ7DmMcROIaHUYitKi8JK4I6vgwdz0wOO12KJpZRMo2o_8OCDb8wlSA");'></div>
+<span class="font-bold text-[#0e1b13]">ARG</span>
+</div>
+<span class="text-xs text-[#4e976b] font-medium">vs</span>
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Mexico" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvZBZryYFoOk5ec75Fi-XD68bcTPtrmrUq5nt2lv920XAwnfrkKum5RYJgyzW1GeanPhAzqSw1ui8fCUd6D3Fz2dGA6dy9Gt3HeAL8FXtHGBj4pvftnm2pt_JXuOqHaMWSMiM-M1QCnD7W6-R6cYIplzgLzqeFLj2yYaD35dkMcbIuI9pEzEkxutBZaGHMLTKNEh7qSRB7qZPSTFu66NyWLGsGjNDG-iMlOcPW3u9ZIpWO1uwdEjuYgqCFJhuWa7LNGAS1cyhzykk");'></div>
+<span class="font-bold text-[#0e1b13]">MEX</span>
+</div>
+</div>
+</div>
+<!-- User Prediction -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Tu Predicción</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>1</span>
+<span class="text-gray-400">-</span>
+<span>0</span>
+</div>
+</div>
+<!-- Actual Result -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Resultado Final</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>2</span>
+<span class="text-gray-400">-</span>
+<span>0</span>
+</div>
+</div>
+<!-- Points & Status -->
+<div class="col-span-2 flex items-center justify-between md:justify-end gap-3">
+<div class="flex flex-col items-end">
+<span class="text-xl font-black text-accent-yellow">+3</span>
+<span class="text-[10px] font-bold text-accent-yellow uppercase">Ganador</span>
+</div>
+<div class="size-10 rounded-full bg-yellow-50 flex items-center justify-center text-accent-yellow">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+</div>
+</div>
+<!-- Item 3: Miss (Red/Gray) -->
+<div class="bg-white rounded-xl border border-l-4 md:border-l border-[#e5e7eb] md:border-gray-200 shadow-sm hover:shadow-md transition-shadow p-4 md:px-6 md:py-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative">
+<!-- Status Strip Mobile -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-red md:hidden"></div>
+<!-- Match Info -->
+<div class="col-span-4 flex flex-col justify-center">
+<div class="text-[10px] text-[#4e976b] font-bold uppercase tracking-wider mb-1">24 Nov • Grupo E</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Spain" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHx7mXgrFCXjkftIye5T_fhLEUA9jj47ceeotNb-kd1VlGTsh9M9JAqLzIjS8VfGn_g3u2XohijcbmBuWAEP_SdEu9mAcyrdWojeF8KCs0rn-fm2p-kPsinsqSNeOhj641oowJInTNdX8wRb4OvtgIkr94smUCdzOekcnKsvGvvgJopRH-LnwppLVhRNRRrgec8yir6sTIKYVmP2s3FucfsKUURzJIVnq9ZkGMRcH_SB-mylHXsT_2tTF-Ou1k71gcYkjQfqqL14g");'></div>
+<span class="font-bold text-[#0e1b13]">ESP</span>
+</div>
+<span class="text-xs text-[#4e976b] font-medium">vs</span>
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Germany" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCQ1amc2mE7074ut1RNy7_M8dUuONJa_4BpwvDLLM-k47gCjRa2o0IFSqEndamuac3S1n6frmI0-MiCjlIBGYbBT0aw3QAdpm0ud99O26vayiNuy_77iRg2yjL6tAPqjjoFd_xuoo-Irq7mVKGw2JlekhPi8n2hg8QzBdJ4l15IJ4n7xSnEIZ-I_LSTdYav5vN1WrPP8xcrqEO11vae5w4_sdCZvjKzE40ug5v8E7jlxZ4k4DNugdYWdI071Jk46CayY2q_ZVZ9eQ");'></div>
+<span class="font-bold text-[#0e1b13]">GER</span>
+</div>
+</div>
+</div>
+<!-- User Prediction -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Tu Predicción</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>1</span>
+<span class="text-gray-400">-</span>
+<span>2</span>
+</div>
+</div>
+<!-- Actual Result -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Resultado Final</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>1</span>
+<span class="text-gray-400">-</span>
+<span>1</span>
+</div>
+</div>
+<!-- Points & Status -->
+<div class="col-span-2 flex items-center justify-between md:justify-end gap-3">
+<div class="flex flex-col items-end">
+<span class="text-xl font-black text-gray-400">0</span>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Fallo</span>
+</div>
+<div class="size-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined">cancel</span>
+</div>
+</div>
+</div>
+<!-- Item 4: Pending -->
+<div class="bg-white rounded-xl border border-l-4 md:border-l border-[#e5e7eb] shadow-sm hover:shadow-md transition-shadow p-4 md:px-6 md:py-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative opacity-80">
+<!-- Status Strip Mobile -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gray-300 md:hidden"></div>
+<!-- Match Info -->
+<div class="col-span-4 flex flex-col justify-center">
+<div class="text-[10px] text-[#4e976b] font-bold uppercase tracking-wider mb-1 flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+                            En Juego • 35'
+                        </div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Portugal" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdeRyKzgjVKYtXJ4CAlhQGrMVNtKf9ByuKeo1YLZEAdSprouZqlADyW04ZM16WqdnqbpmogZMT6FzdhlT81T_kEgmdOiu8tUfxMs0oldnQRogoy-GgFqpKRtgoxL49WlyZ8X7W2nY2BXC_el-1vKFIoYJcvVVdvsiB_hvtGAJPwfjwZzRC1CNm2ErkpohC-XDRN9qwpnlkTfi7HMKSbtUf2OrBEHz1nC7Mgg9ZR2w2iDmOGrfEawgtWSG9i_UZkARtpO8rJfOYu1I");'></div>
+<span class="font-bold text-[#0e1b13]">POR</span>
+</div>
+<span class="text-xs text-[#4e976b] font-medium">vs</span>
+<div class="flex items-center gap-2 min-w-[80px]">
+<div class="size-6 bg-gray-100 rounded-full bg-cover bg-center" data-alt="Flag of Uruguay" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9is4bu7n6gKuUfrrLLqdWUtSPuw1OsHIXdIP1bjH8n2GqcQxVFqde0Xn-Afqf5zXDzw2nZj6kuBqZfbOyl-KcMUBFW1bJKPATj6e_Ho-Ud8dEMy9EfSfwS63KMu7jGX3--bqqpIG3sX9PPteCWWy15W8Z6UfHFw7MwmvCyHoWlrm6vke9S36GWDHN1HUDRIW4XGEUSCVAX-B76I2UR2dlKTMPG1UYaXdMRma5hvXPIIQ7fp_xXE05C9xJpxc8O40j6355M7wkYqQ");'></div>
+<span class="font-bold text-[#0e1b13]">URU</span>
+</div>
+</div>
+</div>
+<!-- User Prediction -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">Tu Predicción</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-[#0e1b13]">
+<span>2</span>
+<span class="text-gray-400">-</span>
+<span>1</span>
+</div>
+</div>
+<!-- Actual Result -->
+<div class="col-span-3 flex md:flex-col items-center justify-between md:justify-center gap-1 bg-[#f8fcfa] md:bg-transparent p-2 md:p-0 rounded-lg">
+<span class="md:hidden text-xs text-[#4e976b] font-medium">En vivo</span>
+<div class="flex items-center gap-3 font-mono text-lg font-bold text-gray-500">
+<span>0</span>
+<span class="text-gray-400">-</span>
+<span>0</span>
+</div>
+</div>
+<!-- Points & Status -->
+<div class="col-span-2 flex items-center justify-between md:justify-end gap-3">
+<div class="flex flex-col items-end">
+<span class="text-xl font-black text-gray-300">-</span>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Pendiente</span>
+</div>
+<div class="size-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-300">
+<span class="material-symbols-outlined">hourglass_top</span>
+</div>
+</div>
+</div>
+<!-- Empty State Example (Hidden visually but good to have structure ready) -->
+<!-- 
+                <div class="flex flex-col items-center justify-center py-12 text-center">
+                    <div class="size-20 rounded-full bg-[#e7f3ec] flex items-center justify-center text-primary mb-4">
+                        <span class="material-symbols-outlined" style="font-size: 40px;">sports_soccer</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[#0e1b13]">No hay pronósticos aún</h3>
+                    <p class="text-[#4e976b] text-sm mt-1 mb-6">Empieza a predecir los partidos para sumar puntos.</p>
+                    <button class="bg-primary text-[#0e1b13] px-6 py-2.5 rounded-lg font-bold text-sm hover:brightness-95 transition-all">
+                        Ir a Partidos
+                    </button>
+                </div>
+                -->
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-8">
+<button class="flex items-center gap-2 px-6 py-2 rounded-lg border border-[#d0e7d9] text-[#0e1b13] font-medium hover:bg-[#e7f3ec] transition-colors">
+<span>Cargar más pronósticos</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

@@ -18,7 +18,7 @@ public class LeaderboardService {
                 .stream()
                 .map(r -> LeaderboardRowDto.builder()
                         .username(r.getUsername())
-                        .totalPoints(r.getTotalPoints() == null ? 0 : r.getTotalPoints())
+                        .score(r.getTotalPoints() == null ? 0 : r.getTotalPoints())
                         .build())
                 .toList();
     }

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MundialScore - Lista de Partidos</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-dark": "#25b860",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                        "text-main": "#0e1b13",
+                        "text-secondary": "#4e976b",
+                        "accent-gold": "#fbbf24",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-text-main dark:text-gray-100">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 flex items-center justify-between border-b border-[#e7f3ec] dark:border-gray-800 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-sm px-6 lg:px-10 py-3 shadow-sm transition-colors duration-200">
+        <div class="flex items-center gap-4">
+            <div class="size-8 text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[32px]">sports_soccer</span>
+            </div>
+            <h2 class="text-text-main dark:text-white text-xl font-bold leading-tight tracking-tight">MundialScore</h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-primary font-semibold text-sm leading-normal hover:text-primary-dark transition-colors"
+                href="dashboard.html">Inicio</a>
+            <a class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="matches.html">Partidos</a>
+            <a class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="leaderboard.html">Ranking</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <div class="hidden sm:flex flex-col items-end mr-2">
+                <span class="text-xs font-semibold text-text-main dark:text-white" id="nav-username">Usuario</span>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 lg:py-12">
+        <!-- Page Heading & Stats -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+            <div class="flex flex-col gap-2">
+                <h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">
+                    Calendario de Partidos</h1>
+            </div>
+        </div>
+        <!-- Filters -->
+        <div
+            class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7f3ec] dark:border-gray-800 p-4 mb-8 flex flex-col lg:flex-row gap-4 justify-between items-center">
+            <div class="flex gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+                <button onclick="filterMatches('all')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-primary text-white dark:text-black font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg transition-all">Todos</button>
+                <button onclick="filterMatches('pending')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] dark:bg-gray-800 text-text-main dark:text-gray-300 font-medium text-sm hover:bg-[#d5eadd] dark:hover:bg-gray-700 transition-colors">Pendientes</button>
+                <button onclick="filterMatches('finished')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] dark:bg-gray-800 text-text-main dark:text-gray-300 font-medium text-sm hover:bg-[#d5eadd] dark:hover:bg-gray-700 transition-colors">Finalizados</button>
+            </div>
+        </div>
+        <!-- Matches List Container -->
+        <div class="flex flex-col gap-4" id="matches-container">
+            <div class="text-center text-gray-500">Cargando partidos...</div>
+        </div>
+    </main>
+
+    <script>
+        const authHeader = localStorage.getItem('authHeader');
+        if (!authHeader) window.location.href = 'login.html';
+        document.getElementById('nav-username').textContent = localStorage.getItem('username') || 'Usuario';
+
+        let allMatches = [];
+
+        async function loadMatches() {
+            try {
+                const response = await fetch('/api/matches', {
+                    headers: { 'Authorization': authHeader }
+                });
+                if (response.ok) {
+                    allMatches = await response.json();
+                    renderMatches(allMatches);
+                } else {
+                    if (response.status === 401) window.location.href = 'login.html';
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('matches-container').innerHTML = '<div class="text-center text-red-500">Error al cargar partidos</div>';
+            }
+        }
+
+        function renderMatches(matches) {
+            const container = document.getElementById('matches-container');
+            container.innerHTML = '';
+
+            if (matches.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500">No hay partidos disponibles.</div>';
+                return;
+            }
+
+            matches.forEach(match => {
+                const card = document.createElement('div');
+                card.className = 'group bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden relative p-5 mb-4';
+
+                let status = match.finished ? 'Finalizado' : 'Pendiente';
+                let scoreHome = match.finished ? match.realHomeGoals : '-';
+                let scoreAway = match.finished ? match.realAwayGoals : '-';
+
+                let actionHtml = '';
+                if (!match.finished) {
+                    actionHtml = `
+                    <div class="flex flex-col items-center justify-center min-w-[160px] gap-2" id="action-${match.id}">
+                        <button onclick="showPredictForm(${match.id})" class="w-full bg-primary hover:bg-primary-dark text-white dark:text-black font-bold py-2.5 px-6 rounded-lg shadow-md shadow-primary/20 transform active:scale-95 transition-all flex items-center justify-center gap-2">
+                             Pronosticar
+                        </button>
+                    </div>
+                `;
+                } else {
+                    actionHtml = `
+                 <div class="flex flex-col items-center justify-center min-w-[160px] gap-2">
+                    <span class="text-lg font-semibold text-gray-500 mb-1">Resultado: ${scoreHome} - ${scoreAway}</span>
+                 </div>
+                `;
+                }
+
+                card.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex flex-col items-center md:items-start min-w-[140px] gap-1">
+                        <span class="text-2xl font-bold text-text-main dark:text-white">${new Date(match.matchDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span class="text-xs font-medium text-text-secondary dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded">${status}</span>
+                        <span class="text-xs text-gray-400 mt-1">${new Date(match.matchDate).toLocaleDateString()}</span>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center gap-4 md:gap-12 w-full">
+                        <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4 flex-1 justify-end text-center md:text-right">
+                            <span class="text-base md:text-lg font-bold text-text-main dark:text-gray-100">${match.homeTeam}</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-300 dark:text-gray-600 uppercase tracking-widest">VS</span>
+                         <div class="flex flex-col md:flex-row-reverse items-center gap-3 md:gap-4 flex-1 justify-start text-center md:text-left">
+                            <span class="text-base md:text-lg font-bold text-text-main dark:text-gray-100">${match.awayTeam}</span>
+                        </div>
+                    </div>
+                    ${actionHtml}
+                </div>
+                <div id="predict-form-${match.id}" class="hidden mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="flex items-center gap-4">
+                            <div class="flex flex-col items-center">
+                                <label class="text-xs mb-1">${match.homeTeam}</label>
+                                <input type="number" min="0" id="pred-home-${match.id}" class="w-16 text-center rounded border-gray-300" placeholder="0">
+                            </div>
+                            <span>-</span>
+                            <div class="flex flex-col items-center">
+                                <label class="text-xs mb-1">${match.awayTeam}</label>
+                                <input type="number" min="0" id="pred-away-${match.id}" class="w-16 text-center rounded border-gray-300" placeholder="0">
+                            </div>
+                        </div>
+                        <button onclick="submitPrediction(${match.id})" class="mt-2 bg-text-main text-white px-4 py-1 rounded text-sm">Guardar</button>
+                    </div>
+                </div>
+            `;
+                container.appendChild(card);
+            });
+        }
+
+        function showPredictForm(matchId) {
+            document.getElementById(`predict-form-${matchId}`).classList.toggle('hidden');
+        }
+
+        async function submitPrediction(matchId) {
+            const homeGoals = document.getElementById(`pred-home-${matchId}`).value;
+            const awayGoals = document.getElementById(`pred-away-${matchId}`).value;
+
+            if (homeGoals === '' || awayGoals === '') {
+                alert('Ingresa los goles para ambos equipos');
+                return;
+            }
+
+            const payload = {
+                matchId: matchId,
+                predictedHomeGoals: parseInt(homeGoals),
+                predictedAwayGoals: parseInt(awayGoals)
+            };
+
+            try {
+                const response = await fetch('/api/predictions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': authHeader,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert('Pronóstico guardado correctamente');
+                    document.getElementById(`predict-form-${matchId}`).classList.add('hidden');
+                } else {
+                    alert('Error al guardar pronóstico');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Error de conexión');
+            }
+        }
+
+        function filterMatches(type) {
+            let filtered = allMatches;
+            if (type === 'pending') filtered = allMatches.filter(m => !m.finished);
+            if (type === 'finished') filtered = allMatches.filter(m => m.finished);
+            renderMatches(filtered);
+        }
+
+        loadMatches();
+    </script>
+</body>
+
+</html>

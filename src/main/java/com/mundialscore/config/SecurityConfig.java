@@ -23,6 +23,9 @@ public class SecurityConfig {
                 // Swagger abierto
                 .requestMatchers("/swagger/**", "/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**").permitAll()
 
+                // Static resources (HTML, CSS, JS, Images)
+                .requestMatchers("/", "/*.html", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
+
                 // Registro abierto
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
 
@@ -39,8 +42,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
                 // Cualquier otra cosa autenticada
-                .anyRequest().authenticated()
-        );
+                .anyRequest().authenticated());
 
         // Basic Auth para usar fácil en Swagger
         http.httpBasic(Customizer.withDefaults());

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Registrar Resultado</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-hover": "#25b861",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Hide number input spinners */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-gray-900 dark:text-gray-100 transition-colors duration-200">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-4">
+<div class="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">sports_soccer</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">MundialScore <span class="text-gray-400 font-medium text-sm ml-2 hidden sm:inline-block">Admin Panel</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary dark:text-primary" href="#">Partidos</a>
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors" href="#">Usuarios</a>
+<a class="text-sm font-medium text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors" href="#">Configuración</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative rounded-full p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+<div class="h-9 w-9 overflow-hidden rounded-full bg-gray-100 ring-2 ring-gray-100 dark:ring-gray-700 bg-cover bg-center" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-NgtyxJYGzoiW84C2VsUoZtvuuRn4i5iEVSfI9-bnga_EkDSYCDLNy0mrz44X8KzReRVGjSWQomNnGV1_YEDaK1cpveJkw2kNR4gDtPnRYNltDMD_xv2pQ_gRjH-50DM0Uzz-OFf1RQc7LNumBczZ9sHU-z1iyQN19CJIcQD35Qcj5mqamcYzjBe3H3YvJZJzid0xD9MF0NG0hg9vW6CRv-nrOUdCVcxc4Dikrs2SX98rGjZDpj_CBAXDVqeA9aiLcdNoB3i9Y8k");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 py-10 px-4 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-4xl space-y-8">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex text-sm text-gray-500 dark:text-gray-400">
+<ol class="inline-flex items-center space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-lg">home</span>
+                            Inicio
+                        </a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-lg text-gray-400">chevron_right</span>
+<a class="ml-2 hover:text-primary" href="#">Partidos</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-lg text-gray-400">chevron_right</span>
+<span class="ml-2 font-medium text-gray-900 dark:text-white">Registrar Resultado</span>
+</div>
+</li>
+</ol>
+</nav>
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Registrar Resultado Real</h2>
+<p class="mt-2 text-gray-600 dark:text-gray-400">Ingresa el marcador final para calcular los puntos de los usuarios.</p>
+</div>
+<div class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 ring-1 ring-inset ring-yellow-600/20">
+<span class="mr-1.5 h-2 w-2 rounded-full bg-yellow-600"></span>
+                    Estado: Pendiente de resultado
+                </div>
+</div>
+<!-- Match Card Container -->
+<div class="overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-sm ring-1 ring-gray-900/5 dark:ring-white/10">
+<!-- Match Details Header -->
+<div class="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-white/5 px-6 py-8 sm:px-10 text-center">
+<div class="mb-6 flex flex-col items-center gap-2">
+<div class="flex items-center gap-2 text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+<span>Final del Mundial</span>
+<span class="h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
+<span>18 Dic, 18:00</span>
+</div>
+<div class="flex items-center gap-1 text-gray-400 dark:text-gray-500">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<span class="text-sm">Estadio Lusail, Qatar</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
+<!-- Home Team -->
+<div class="flex flex-col items-center gap-4 w-32">
+<div class="relative h-24 w-24 overflow-hidden rounded-full shadow-lg ring-4 ring-white dark:ring-surface-dark bg-gray-200" data-alt="Flag of Argentina">
+<img alt="Argentina Flag" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-5g1-acrIJ5E78_I3_PExaHpCNjtKwT-ZACcY_6wzLAYF2KKOo8Rv9ZUCcfP3bHXfMapi88SboK_rQdjbenKZPEVyGR4aQW2llXzd5DSYRXT5kxy4YAce5cDPjOe6iKleNFMmX7dGCoezI9Vsz8wm6ls1a9qOmPE07-ZvF8-tRua4J5J4mXtyDK28N-SRLSnPammAXvko55fzCjKkSdkH5en36t8NS4aBKoRRloJAf8_l35pz0Rl-5hwLAU1ZD3Ts0tCJTG_3zmA"/>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white">Argentina</h3>
+</div>
+<!-- VS Badge -->
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-sm font-bold text-gray-500 dark:text-gray-400 shadow-inner">
+                            VS
+                        </div>
+<!-- Away Team -->
+<div class="flex flex-col items-center gap-4 w-32">
+<div class="relative h-24 w-24 overflow-hidden rounded-full shadow-lg ring-4 ring-white dark:ring-surface-dark bg-gray-200" data-alt="Flag of France">
+<img alt="France Flag" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiJ3ZVrDpX0FGQnWv1gTnxXvbLCD-iI4IOhKtJfrdwFiGmbD0SWfnheRZGrtGlxvzoN9VOLzrMk1NxPBT12PSzeUkJQNXoqkJaaWYa437p1gl42H3awzD-9VMJkLKMF920yZmHtCian-6-H5fiz6skFEl6R0281v_Uq184obZ6o0KlB1ToWjvciBB6_CEmT_zOdOvaKDmTSVIHDmiH8jxrQhov4n1vhVLwfR7SjU9y_s5tVzGEf4GC9ycMTDvXWhgQl_B-rgCwSs4"/>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white">Francia</h3>
+</div>
+</div>
+</div>
+<!-- Input Form Section -->
+<div class="px-6 py-10 sm:px-10">
+<form action="#" method="POST">
+<div class="mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-2">
+<!-- Home Score Input -->
+<div class="flex flex-col gap-3">
+<label class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white text-center" for="home-score">Goles Argentina (Local)</label>
+<div class="relative mt-2 rounded-xl shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+<span class="text-gray-400 material-symbols-outlined">sports_soccer</span>
+</div>
+<input class="block w-full rounded-xl border-0 py-4 pl-12 pr-4 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:bg-black/20 dark:text-white dark:ring-gray-700 text-center text-3xl font-bold tracking-tight" id="home-score" max="20" min="0" name="home-score" placeholder="0" type="number"/>
+<div class="absolute inset-y-0 right-0 flex flex-col border-l border-gray-200 dark:border-gray-700">
+<button class="flex flex-1 items-center justify-center px-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-gray-500">expand_less</span>
+</button>
+<button class="flex flex-1 items-center justify-center px-3 hover:bg-gray-100 dark:hover:bg-gray-800 border-t border-gray-200 dark:border-gray-700 rounded-br-xl transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-gray-500">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Away Score Input -->
+<div class="flex flex-col gap-3">
+<label class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white text-center" for="away-score">Goles Francia (Visitante)</label>
+<div class="relative mt-2 rounded-xl shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+<span class="text-gray-400 material-symbols-outlined">sports_soccer</span>
+</div>
+<input class="block w-full rounded-xl border-0 py-4 pl-12 pr-4 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:bg-black/20 dark:text-white dark:ring-gray-700 text-center text-3xl font-bold tracking-tight" id="away-score" max="20" min="0" name="away-score" placeholder="0" type="number"/>
+<div class="absolute inset-y-0 right-0 flex flex-col border-l border-gray-200 dark:border-gray-700">
+<button class="flex flex-1 items-center justify-center px-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-tr-xl transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-gray-500">expand_less</span>
+</button>
+<button class="flex flex-1 items-center justify-center px-3 hover:bg-gray-100 dark:hover:bg-gray-800 border-t border-gray-200 dark:border-gray-700 rounded-br-xl transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-gray-500">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Penalties Section (Toggle) -->
+<div class="mt-8 flex justify-center">
+<label class="inline-flex cursor-pointer items-center gap-3">
+<input class="peer sr-only" type="checkbox" value=""/>
+<div class="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700"></div>
+<span class="text-sm font-medium text-gray-900 dark:text-gray-300">Definido por penales</span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 border-t border-gray-100 dark:border-gray-700 pt-8">
+<button class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-300 px-6 py-3 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors w-full sm:w-auto" type="button">
+                                Cancelar
+                            </button>
+<button class="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full sm:w-auto gap-2 transition-all active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-xl">save</span>
+                                Guardar Resultado
+                            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Success Message (Visually hidden placeholder for interaction design) -->
+<div class="rounded-xl bg-green-50 p-4 border border-green-200 dark:bg-green-900/20 dark:border-green-900/50 hidden">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400">check_circle</span>
+</div>
+<div class="ml-3">
+<h3 class="text-sm font-medium text-green-800 dark:text-green-300">Resultado guardado correctamente</h3>
+<div class="mt-2 text-sm text-green-700 dark:text-green-400">
+<p>Los puntos de 2,450 usuarios han sido recalculados en base a este marcador.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark py-6">
+<div class="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            © 2024 MundialScore. Todos los derechos reservados.
+        </div>
+</footer>
+</body></html>

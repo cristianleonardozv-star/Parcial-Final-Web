@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MundialScore - Registrar Pronóstico</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-dark": "#25b560",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2c23",
+                        "text-main": "#0e1b13",
+                        "text-secondary": "#4e976b",
+                        "border-light": "#e7f3ec",
+                        "border-dark": "#2a4034",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles to hide number input spinners */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display min-h-screen flex flex-col transition-colors duration-200">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-card-light dark:bg-card-dark border-b border-border-light dark:border-border-dark px-6 py-3 shadow-sm">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-text-main dark:text-white">MundialScore</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors text-text-main dark:text-gray-200" href="#">Inicio</a>
+<a class="text-sm font-medium hover:text-primary transition-colors text-text-main dark:text-gray-200" href="#">Partidos</a>
+<a class="text-sm font-medium hover:text-primary transition-colors text-text-main dark:text-gray-200" href="#">Clasificación</a>
+<a class="text-sm font-medium hover:text-primary transition-colors text-text-main dark:text-gray-200" href="#">Mi Perfil</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-primary cursor-pointer hover:opacity-80 transition-opacity" data-alt="User profile avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBi7er8Tknm_9Lq1ssXS9T8Nk6nvzgWf_OWxCm5YeVtUtLRhPKccOs7Tk0YzZAFhc1ulyq4z8wS5Y7txXHhbAgM0VKL66XQHdNxBeqh2jUgwWtaAjnH_v-02n4Vh0gohtySNWdmA8Tokuc4hDhTHJa-CCXIbgMvH3DtkbUMC0xwEqLVZl3r_Pu9DdO3an-lhbr1Gnp-_UNYkHp3uXRVOzIOg9CojGCEBkimXIOZJDiinu8-_mBb4ZV2ESyUVRj2G0JxO1pdHF5cbko");'>
+</div>
+<button class="md:hidden text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-start py-10 px-4 sm:px-6">
+<div class="w-full max-w-4xl space-y-8">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+<div>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-text-main dark:text-white mb-2">Registrar Pronóstico</h2>
+<p class="text-text-secondary dark:text-gray-400">Predice el resultado final y gana puntos para la tabla.</p>
+</div>
+<!-- Breadcrumb/Status indicator -->
+<div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary-dark dark:text-primary text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-base">sports_soccer</span>
+                    Fase de Grupos
+                </div>
+</div>
+<!-- Prediction Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-2xl shadow-sm border border-border-light dark:border-border-dark overflow-hidden">
+<!-- Match Meta Header -->
+<div class="bg-background-light dark:bg-[#15261d] px-6 py-4 flex flex-col sm:flex-row justify-between items-center border-b border-border-light dark:border-border-dark gap-2">
+<div class="flex items-center gap-2 text-text-secondary dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>26 Nov, 2022 - 14:00 PM</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary dark:text-gray-400 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">stadium</span>
+<span>Lusail Stadium, Qatar</span>
+</div>
+</div>
+<!-- Match Content -->
+<div class="p-6 md:p-10">
+<!-- Teams Display -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+<!-- Team 1 (Local) -->
+<div class="flex flex-col items-center gap-4 flex-1 w-full">
+<div class="relative group">
+<div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-background-light dark:border-border-dark shadow-md bg-white flex items-center justify-center">
+<img alt="Argentina Flag" class="w-full h-full object-cover" data-alt="Bandera de Argentina" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWb-06He2OfuAXHqFEPCGDZPmMkvOnOc9lA9DPHWm4y9TnOdKuaDBT4SSZSytpu2GEu7IgvqVzjK2Nfv28OGfsgV0gU0WsFqsF0E9SygFMHiK8cpTNQEWST637q4ARN9hRO2P-EXhZ-dBo4na-FTgxZrb8WyFjrrFVSJaus9wRO7AzgvE9ejV7OH5vU6gWBQVDMvyXtSyFfJNn7g2X0xBtmqEkO-b-qW0T5Lb1L6wj-giIjlxrLAVtzTjaf6PxgmLyYFCn4g4fx1E"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-background-light dark:bg-card-dark px-2 py-1 rounded-md text-xs font-bold text-text-secondary shadow-sm border border-border-light dark:border-border-dark">Local</div>
+</div>
+<h3 class="text-2xl font-bold text-text-main dark:text-white text-center">Argentina</h3>
+</div>
+<!-- VS Divider -->
+<div class="flex flex-col items-center justify-center gap-2">
+<span class="text-4xl font-black text-border-light dark:text-border-dark select-none opacity-50">VS</span>
+</div>
+<!-- Team 2 (Visitor) -->
+<div class="flex flex-col items-center gap-4 flex-1 w-full">
+<div class="relative group">
+<div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-background-light dark:border-border-dark shadow-md bg-white flex items-center justify-center">
+<img alt="Mexico Flag" class="w-full h-full object-cover" data-alt="Bandera de México" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnj8Vpe2CTGAr2riwD08TzQ8EDmU4W8hS9uyX4k6Ibnv2Rqz1f9Xeza_tPZcgHTW3YTy6eBLz4BPiVEEPYZqe35RSaouYnkYMfhRDfNgWniXdJQ_XWvssoM6ot_-5-9UWRfQ4rCFX4R6zwDkApp8JndgXoI47Jk_z00IOCJK1g2DLb50l-UWixhbSKYnqSo8MihwDitCkHDqfhnXZwkE4xPcUOqPn9AyZw1alyKNzXhPKOBUzAETRVMwrWUYbRGbUolUZmu-OX6-8"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-background-light dark:bg-card-dark px-2 py-1 rounded-md text-xs font-bold text-text-secondary shadow-sm border border-border-light dark:border-border-dark">Visitante</div>
+</div>
+<h3 class="text-2xl font-bold text-text-main dark:text-white text-center">México</h3>
+</div>
+</div>
+<!-- Score Inputs Area -->
+<div class="bg-background-light dark:bg-[#13241a] rounded-xl p-6 md:p-8">
+<div class="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-12">
+<!-- Input Local -->
+<div class="flex flex-col items-center gap-3 w-full sm:w-auto">
+<label class="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400" for="score-local">Goles Argentina</label>
+<div class="relative group">
+<input class="w-32 h-24 bg-card-light dark:bg-card-dark text-center text-5xl font-bold text-text-main dark:text-white border-2 border-border-light dark:border-border-dark rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all shadow-sm placeholder-gray-300" id="score-local" min="0" placeholder="-" type="number"/>
+</div>
+</div>
+<span class="hidden sm:block text-3xl font-bold text-gray-300 dark:text-gray-600">:</span>
+<!-- Input Visitor -->
+<div class="flex flex-col items-center gap-3 w-full sm:w-auto">
+<label class="text-sm font-semibold uppercase tracking-wider text-text-secondary dark:text-gray-400" for="score-visitor">Goles México</label>
+<div class="relative group">
+<input class="w-32 h-24 bg-card-light dark:bg-card-dark text-center text-5xl font-bold text-text-main dark:text-white border-2 border-border-light dark:border-border-dark rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all shadow-sm placeholder-gray-300" id="score-visitor" min="0" placeholder="-" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-10 flex flex-col-reverse sm:flex-row justify-center items-center gap-4">
+<button class="w-full sm:w-auto px-8 h-12 rounded-lg font-bold text-text-secondary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5 transition-colors">
+                            Cancelar
+                        </button>
+<button class="w-full sm:w-auto min-w-[240px] h-12 bg-primary hover:bg-primary-dark text-text-main font-bold text-base rounded-lg shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined">save</span>
+                            Guardar Pronóstico
+                        </button>
+</div>
+</div>
+</div>
+<!-- Info / Disclaimer -->
+<div class="flex items-start gap-3 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
+<span class="material-symbols-outlined text-blue-500 mt-0.5">info</span>
+<div class="text-sm text-blue-800 dark:text-blue-200">
+<p class="font-semibold mb-1">Reglas de puntuación:</p>
+<ul class="list-disc list-inside space-y-1 opacity-80">
+<li>Resultado exacto: <strong>5 puntos</strong></li>
+<li>Ganador correcto y diferencia de goles: <strong>3 puntos</strong></li>
+<li>Solo ganador correcto: <strong>1 punto</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="w-full py-6 mt-auto text-center border-t border-border-light dark:border-border-dark">
+<p class="text-sm text-text-secondary dark:text-gray-500">
+            © 2024 MundialScore. Todos los derechos reservados.
+        </p>
+</footer>
+</body></html>

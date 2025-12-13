@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MundialScore - Panel de Administración</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30e87a",
+                        "primary-dark": "#25b860",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c22",
+                        "text-main": "#0e1b13",
+                        "text-secondary": "#4e976b",
+                        "accent-gold": "#fbbf24",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-text-main dark:text-gray-100">
+    <header
+        class="sticky top-0 z-50 flex items-center justify-between border-b border-[#e7f3ec] dark:border-gray-800 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-sm px-6 lg:px-10 py-3 shadow-sm transition-colors duration-200">
+        <div class="flex items-center gap-4">
+            <h2 class="text-text-main dark:text-white text-xl font-bold leading-tight tracking-tight">MundialScore Admin
+            </h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-text-main dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors"
+                href="dashboard.html">Volver al Sitio</a>
+        </nav>
+    </header>
+    <main class="flex-1 w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 lg:py-12">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+            <div class="flex flex-col gap-2">
+                <h1 class="text-text-main dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">
+                    Administración de Partidos</h1>
+            </div>
+        </div>
+
+        <div
+            class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7f3ec] dark:border-gray-800 p-4 mb-8 flex flex-col lg:flex-row gap-4 justify-between items-center">
+            <div class="flex gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+                <button onclick="filterMatches('all')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-primary text-white dark:text-black font-semibold text-sm shadow-md shadow-primary/20 hover:shadow-lg transition-all">Todos</button>
+                <button onclick="filterMatches('pending')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] dark:bg-gray-800 text-text-main dark:text-gray-300 font-medium text-sm hover:bg-[#d5eadd] dark:hover:bg-gray-700 transition-colors">Pendientes</button>
+                <button onclick="filterMatches('finished')"
+                    class="whitespace-nowrap px-4 py-2 rounded-lg bg-[#e7f3ec] dark:bg-gray-800 text-text-main dark:text-gray-300 font-medium text-sm hover:bg-[#d5eadd] dark:hover:bg-gray-700 transition-colors">Finalizados</button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-4" id="matches-container">
+            <div class="text-center text-gray-500">Cargando partidos...</div>
+        </div>
+    </main>
+
+    <script>
+        const authHeader = localStorage.getItem('authHeader');
+        if (!authHeader) window.location.href = 'login.html';
+
+        // Simple role check (client side only, server enforces security)
+        const authorities = localStorage.getItem('authorities');
+        if (!authorities || !authorities.includes('ROLE_ADMIN')) {
+            // Just a warning, if server rejects it's fine.
+            console.warn('Usuario no parece ser admin');
+        }
+
+        let allMatches = [];
+
+        async function loadMatches() {
+            try {
+                const response = await fetch('/api/matches', {
+                    headers: { 'Authorization': authHeader }
+                });
+                if (response.ok) {
+                    allMatches = await response.json();
+                    renderMatches(allMatches);
+                } else {
+                    if (response.status === 401) window.location.href = 'login.html';
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('matches-container').innerHTML = '<div class="text-center text-red-500">Error al cargar partidos</div>';
+            }
+        }
+
+        function renderMatches(matches) {
+            const container = document.getElementById('matches-container');
+            container.innerHTML = '';
+
+            if (matches.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500">No hay partidos disponibles.</div>';
+                return;
+            }
+
+            matches.forEach(match => {
+                const card = document.createElement('div');
+                card.className = 'bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-4 mb-4';
+
+                let status = match.finished ? 'Finalizado' : 'Pendiente';
+                let currentHome = match.realHomeGoals != null ? match.realHomeGoals : 0;
+                let currentAway = match.realAwayGoals != null ? match.realAwayGoals : 0;
+
+                card.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex flex-col gap-1 w-full md:w-auto">
+                        <span class="font-bold text-lg">${match.homeTeam} vs ${match.awayTeam}</span>
+                        <span class="text-xs text-gray-500">${new Date(match.matchDate).toLocaleString()} - ${status}</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg w-full md:w-auto justify-center">
+                        <div class="flex flex-col items-center">
+                            <label class="text-xs font-medium mb-1">${match.homeTeam}</label>
+                            <input type="number" min="0" id="real-home-${match.id}" value="${currentHome}" class="w-16 text-center rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                        <span class="font-bold">-</span>
+                        <div class="flex flex-col items-center">
+                            <label class="text-xs font-medium mb-1">${match.awayTeam}</label>
+                            <input type="number" min="0" id="real-away-${match.id}" value="${currentAway}" class="w-16 text-center rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                        <button onclick="updateResult(${match.id})" class="ml-4 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                            ${match.finished ? 'Actualizar' : 'Finalizar'}
+                        </button>
+                    </div>
+                </div>
+            `;
+                container.appendChild(card);
+            });
+        }
+
+        async function updateResult(matchId) {
+            const homeGoals = document.getElementById(`real-home-${matchId}`).value;
+            const awayGoals = document.getElementById(`real-away-${matchId}`).value;
+
+            if (homeGoals === '' || awayGoals === '') {
+                alert('Ingresa los goles para ambos equipos');
+                return;
+            }
+
+            const payload = {
+                matchId: matchId,
+                realHomeGoals: parseInt(homeGoals),
+                realAwayGoals: parseInt(awayGoals)
+            };
+
+            try {
+                const response = await fetch('/api/admin/matches/result', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': authHeader,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert('Resultado actualizado correctamente. Puntos recalculados.');
+                    loadMatches(); // Reload to see updated status
+                } else {
+                    alert('Error al actualizar resultado (¿Permisos?)');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Error de conexión');
+            }
+        }
+
+        function filterMatches(type) {
+            let filtered = allMatches;
+            if (type === 'pending') filtered = allMatches.filter(m => !m.finished);
+            if (type === 'finished') filtered = allMatches.filter(m => m.finished);
+            renderMatches(filtered);
+        }
+
+        loadMatches();
+    </script>
+</body>
+
+</html>
