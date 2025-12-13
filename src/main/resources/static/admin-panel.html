@@ -56,6 +56,33 @@
             </div>
         </div>
 
+        <!-- Create Match Form -->
+        <div
+            class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7f3ec] dark:border-gray-800 p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4 text-text-main dark:text-white">Crear Nuevo Partido</h2>
+            <form id="create-match-form" class="flex flex-col lg:flex-row gap-4 items-end">
+                <div class="flex flex-col gap-2 w-full lg:w-1/4">
+                    <label class="text-sm font-medium text-text-main dark:text-gray-300">Equipo Local</label>
+                    <input type="text" id="new-home-team" required
+                        class="rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-primary focus:border-primary text-text-main dark:text-gray-200">
+                </div>
+                <div class="flex flex-col gap-2 w-full lg:w-1/4">
+                    <label class="text-sm font-medium text-text-main dark:text-gray-300">Equipo Visitante</label>
+                    <input type="text" id="new-away-team" required
+                        class="rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-primary focus:border-primary text-text-main dark:text-gray-200">
+                </div>
+                <div class="flex flex-col gap-2 w-full lg:w-1/4">
+                    <label class="text-sm font-medium text-text-main dark:text-gray-300">Fecha y Hora</label>
+                    <input type="datetime-local" id="new-match-date" required
+                        class="rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-primary focus:border-primary text-text-main dark:text-gray-200">
+                </div>
+                <button type="submit"
+                    class="w-full lg:w-auto bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-bold transition-colors shadow-lg shadow-primary/30 h-[42px]">
+                    Crear
+                </button>
+            </form>
+        </div>
+
         <div
             class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-[#e7f3ec] dark:border-gray-800 p-4 mb-8 flex flex-col lg:flex-row gap-4 justify-between items-center">
             <div class="flex gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
@@ -140,11 +167,39 @@
                         <button onclick="updateResult(${match.id})" class="ml-4 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors">
                             ${match.finished ? 'Actualizar' : 'Finalizar'}
                         </button>
+                        <button onclick="deleteMatch(${match.id})" class="ml-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                            Eliminar
+                        </button>
                     </div>
                 </div>
             `;
                 container.appendChild(card);
             });
+        }
+
+        async function deleteMatch(matchId) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este partido? Esta acción no se puede deshacer.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/matches/${matchId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': authHeader
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Partido eliminado correctamente');
+                    loadMatches();
+                } else {
+                    alert('Error al eliminar el partido');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Error de conexión');
+            }
         }
 
         async function updateResult(matchId) {
@@ -190,6 +245,39 @@
             if (type === 'finished') filtered = allMatches.filter(m => m.finished);
             renderMatches(filtered);
         }
+
+        document.getElementById('create-match-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const home = document.getElementById('new-home-team').value;
+            const away = document.getElementById('new-away-team').value;
+            const date = document.getElementById('new-match-date').value;
+
+            try {
+                const response = await fetch('/api/matches', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': authHeader,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        homeTeam: home,
+                        awayTeam: away,
+                        matchDate: date
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Partido creado exitosamente');
+                    document.getElementById('create-match-form').reset();
+                    loadMatches();
+                } else {
+                    alert('Error al crear el partido');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Error de conexión');
+            }
+        });
 
         loadMatches();
     </script>

@@ -18,4 +18,16 @@ public class MatchController {
     public List<MatchResponseDto> list() {
         return matchService.listMatches();
     }
+
+    @PostMapping
+    @ResponseStatus(org.springframework.http.HttpStatus.CREATED)
+    public MatchResponseDto create(@RequestBody com.mundialscore.dto.CreateMatchRequestDto dto) {
+        return matchService.createMatch(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(org.springframework.http.HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        matchService.deleteMatch(id);
+    }
 }

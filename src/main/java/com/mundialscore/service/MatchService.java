@@ -22,6 +22,17 @@ public class MatchService {
                 .toList();
     }
 
+    public MatchResponseDto createMatch(com.mundialscore.dto.CreateMatchRequestDto dto) {
+        Match match = Match.builder()
+                .homeTeam(dto.getHomeTeam())
+                .awayTeam(dto.getAwayTeam())
+                .matchDate(dto.getMatchDate())
+                .finished(false)
+                .build();
+        Match saved = matchRepository.save(match);
+        return toDto(saved);
+    }
+
     public Match getMatchOrThrow(Long id) {
         return matchRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Partido no encontrado: " + id));
@@ -37,5 +48,9 @@ public class MatchService {
                 .realHomeGoals(m.getRealHomeGoals())
                 .realAwayGoals(m.getRealAwayGoals())
                 .build();
+    }
+
+    public void deleteMatch(Long id) {
+        matchRepository.deleteById(id);
     }
 }
