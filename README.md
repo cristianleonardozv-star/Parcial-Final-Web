@@ -59,10 +59,6 @@ MundialScore incluye documentación interactiva de la API generada con OpenAPI. 
 
 - **Swagger UI**: `http://localhost:8080/swagger-ui.html`
 
-## 🤝 Contribución
+## 🤝 Acceder como administrador
+Para poder acceder como administrador es usuario: admin y contraseña: admin123.
 
-¡Las contribuciones son bienvenidas! Por favor, abre un *issue* o envía un *pull request* para mejoras y correcciones.
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT.
